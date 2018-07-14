@@ -1,0 +1,36 @@
+.privacy-policy,
+.terms {
+    margin: 40px auto;
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 20px;
+  }
+
+  ol,
+  ul{
+    margin-bottom: 20px;
+
+    li {
+      margin-left: 20px;
+      margin-bottom: 5px;
+      padding-left: 10px;
+    }
+  }
+
+  a {
+    color: $black;
+    text-decoration: underline;
+  }
+
+  .under {
+    text-decoration: underline;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+}

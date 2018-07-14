@@ -1,0 +1,137 @@
+.noscroll {
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  #modal {
+      box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.25);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 99999;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    @include animation(fadeIn .25s ease-in-out);
+
+    &.inactive {
+      @include animation(fadeOut .25s ease-in-out);
+    }
+
+    > :first-child {
+      position: relative;
+      margin: 1em auto 0;
+
+      @include breakpoint(mobile) {
+  //      margin-top: 0;
+      }
+    }
+
+    .payment-container,
+    .iframe-container {
+      margin-top: 20px;
+      width: 70%;
+      min-height: 50%;
+      padding: 20px;
+      position: relative;
+      background-color: #fff;
+
+      @include breakpoint(mobile) {
+        width: 100%;
+        height: 100%;
+        -webkit-overflow-scrolling: touch;
+        overflow-y: scroll;
+      }
+
+      .heading {
+        color: $store-space-red;
+        font-size: 28px;
+        line-height: 28px;
+        margin-bottom: 40px;
+        text-align: center;
+      }
+
+      a.payment-location {
+        color: $store-space-blue;
+        display: block;
+        text-align: center;
+        margin-bottom: 20px;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        span {
+          display: block;
+          color: $store-space-gray;
+        }
+      }
+
+      > iframe {
+        width: 94%;
+        height: 88%;
+        border: none;
+        position: absolute;
+        left: 3%;
+        top: 8%;
+      }
+
+      > #modal-close {
+        right: 5px;
+        top: 5px;
+      }
+    }
+
+    .expand {
+      width: 1000px;
+      max-width: 90%;
+      height: calc(100% - 20px - 20px);
+      margin: auto;
+      margin-top: 20px;
+      background-color: white;
+      padding: 20px;
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        margin: auto;
+      }
+    }
+
+  }
+
+  #modal-close {
+    color: #262626;
+    cursor: pointer;
+    display: block;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 5;
+    overflow: hidden;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 100%;
+    white-space: nowrap;
+
+    &:before {
+      content: '\d7';
+      display: block;
+      font-weight: 200;
+      font-size: 40px;
+      width: 100%;
+      height: 100%;
+      text-indent: 0;
+    }
+
+    @include breakpoint(mobile) {
+  //      position: fixed;
+      right: 0;
+      top: 0;
+    }
+  }

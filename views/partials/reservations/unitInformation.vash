@@ -1,0 +1,43 @@
+        <table>
+          <tr class="unit-info info">
+            <td>Unit Info</td>
+          </tr>
+          <tr>
+            <td>Location:</td>
+            <td>@model.site.sSiteCity, @model.site.sSiteRegion</td>
+          </tr>
+          <tr>
+            <td>Size:</td>
+            <td>@model.unit.displaySize</td>
+          </tr>
+          <tr class="bottom-border">
+            <td>Type:</td>
+            <td>@model.unit.sTypeName</td>
+          </tr>
+          <tr class="rate-info info">
+            <td>Fees</td>
+          </tr>
+          @model.moveIn.costs.forEach(function(cost) {
+            <tr>
+              <td>@cost.ChargeDescription</td>
+              @{
+                rate = cost.dcTotal*1 - cost.dcTax1*1 - cost.dcTax2*1
+              }
+              <td>@html.formatCurrency(@rate)</td>
+            </tr>
+          })
+          <tr class="bottom-border">
+            <td>Taxes:</td>
+            <td>@html.formatCurrency(model.moveIn.taxes)</td>
+          </tr>
+          <tr class="monthly-total bottom-border">
+            <td>Move-In Total:</td>
+            <td>@html.formatCurrency(model.moveIn.total)</td>
+          </tr>
+          @if(model.unitType.concession){
+            <tr class="promotions">
+              <td>Promotions:</td>
+              <td class="promo-name">@model.unitType.concession.displayName</td>
+            </tr>
+          }
+        </table>

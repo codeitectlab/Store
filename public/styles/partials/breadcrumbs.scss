@@ -1,0 +1,18 @@
+.breadcrumbs {
+  margin: 20px auto 20px auto;
+
+  a {
+    color: $black;
+    font-size: 14px;
+    opacity: 0.75;
+
+    &:after {
+      content: '>';
+      margin: 0 5px;
+    }
+
+    &:last-of-type:after {
+      display: none;
+    }
+  }
+}

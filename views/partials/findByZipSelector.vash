@@ -1,0 +1,26 @@
+<div class="location-selector">
+  <div class="container location-list">
+    <div class="heading">Search results for <strong>@model.searchedZip</strong></h5>
+    <div class="text"></div>
+    @if(model.locations){
+      <div class="locations">
+        @{
+          Object.keys(model.locations).forEach(function(state){
+            <div class="state @state" state="@state">
+              <div class="state-label"><i class="fas fa-map-marker-alt"></i> @state</div>
+              <div class="cities">
+                @model.locations[state].forEach(function(city){
+                  <a href="/locations/@city.sLocationCode" class="city">@city.displayCity</a>
+                })
+              </div>
+
+            </div>
+          })
+        }
+      </div>
+    }
+  </div>
+  @if(model.map){
+    @html.include('partials/map')
+  }
+</div>

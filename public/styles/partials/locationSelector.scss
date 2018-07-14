@@ -1,0 +1,70 @@
+.location-selector {
+  @include display-flex();
+  @include flex-direction(row);
+  margin-bottom: 20px;
+
+  @include breakpoint(mobile) {
+    @include flex-direction(column);
+  }
+
+  .location-list {
+    min-width: 300px;
+    max-width: 450px;
+    padding: 20px 40px;
+
+    @include breakpoint(mobile) {
+      max-width: 100%;
+      width: 100%;
+      min-width: 75%;
+    }
+
+    .heading {
+      color: $store-space-blue;
+      font-size: 28px;
+      line-height: 28px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .text {
+      border-bottom: 1px solid #00669a;
+      font-size: 16px;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .locations {
+      .state {
+        .state-label {
+          color: $store-space-red;
+          font-weight: bold;
+          padding-top: 10px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        .cities {
+          .city{
+            color: $store-space-red;
+            padding: 5px 0 5px 20px;
+            display: none;
+          }
+        }
+
+        &.active {
+          .cities .city {
+            display: block;
+          }
+        }
+      }
+
+    }
+  }
+
+  .map {
+    @include flex-grow(1);
+  }
+}

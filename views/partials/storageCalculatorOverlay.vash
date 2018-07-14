@@ -1,0 +1,6 @@
+<div class="storage-calculator-overlay">
+  <img src="@(html.staticFilePath)/images/icon_ruler.svg">
+  <div class="heading">Not Sure How Big A Unit You Need?</div>
+  <div class="text">Check out our handy calculator to figure out exactly what you need</div>
+  <a href="storage-calculator"><i class="fas fa-calculator"></i>Storage Calculator</a>
+</div>

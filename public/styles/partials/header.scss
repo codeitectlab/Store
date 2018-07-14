@@ -1,0 +1,266 @@
+header {
+  width: 100%;
+  @include flex-direction(column);
+  z-index: 999;
+
+  .top-bar,
+  .nav {
+    width: 100%;
+    @include justify-content(center);
+
+    .container {
+      @include justify-content(space-between);
+      height: 100%;
+    }
+  }
+
+  .top-bar {
+    background-color: $store-space-blue;
+    height: 100px;
+
+    @include breakpoint(mobile) {
+      height: 75px;
+    }
+
+    .container {
+      padding: 17px 20px;
+      align-items: flex-end;
+
+      @include breakpoint(mobile) {
+        padding: 0 20px;
+        align-items: center;
+      }
+    }
+
+    .left {
+
+    }
+
+    .right {
+      @include flex-grow(1);
+      @include justify-content(flex-end);
+
+      > * {
+        margin: 0 10px;
+      }
+
+      div:first-of-type  {
+        margin-left: 0;
+      }
+
+      div:last-of-type {
+        margin-right: 0;
+      }
+    }
+
+    .phone-container {
+      font-size: 28px;
+
+      @include breakpoint(mobile) {
+        background-color: white;
+        margin-right: 53px;
+        margin-top: 10px;
+        height: 40px;
+        width: 40px;
+        border-radius: 4px;
+      }
+
+      a{
+        @include breakpoint(tablet) {
+          font-size: 24px;
+        }
+
+        @include breakpoint(mobile) {
+          font-size: 24px;
+        }
+
+        i {
+          color: $store-space-red;
+          display: none;
+
+          @include breakpoint(mobile) {
+            @include display-flex();
+          }
+        }
+
+        span {
+          @include breakpoint(mobile) {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .logo-container {
+      a img {
+        max-width: 300px;
+        position: relative;
+
+        @include breakpoint(mobile) {
+          max-width: 100%;
+          max-height: 40px;
+        }
+
+
+      }
+    }
+
+    .reserve-unit-container {
+      @include breakpoint(mobile) {
+        display: none;
+      }
+
+      .reserve-unit {
+        text-transform: uppercase;
+        padding: 10px 20px 8px;
+        background-color: $store-space-red;
+        border-radius: 5px;
+        font-family: 'Raleway', sans-serif;
+        font-weight: 900;
+        font-size: 24px;
+        letter-spacing: 1px;
+        box-shadow: 0 3px $store-space-red-shadow;
+
+        @include breakpoint(tablet) {
+          font-size: 20px;
+          letter-spacing: 0.5px;
+          padding: 8px 16px 6px;
+        }
+
+      }
+    }
+  }
+
+  .nav {
+    background-color: transparentize($store-space-red, 0.1);
+    height: 60px;
+
+    @include breakpoint(mobile) {
+      @include flex-direction(column);
+      @include align-items(flex-end);
+      background-color: transparent;
+      position: absolute;
+      height: 100%;
+      top: 0px;
+      z-index: 999;
+      pointer-events: none;
+    }
+
+    #menu-checkbox {
+      display: none;
+    }
+
+    .menu {
+      display: none;
+      height: 80px;
+      margin-right: 20px;
+      padding-top: 20px;
+
+      @include breakpoint(mobile) {
+        @include display-flex();
+        @include flex(0 0 auto);
+        pointer-events: all;
+        height: 30px;
+        margin-top: 28px;
+        margin-bottom: 17px;
+        padding-top: 0;
+      }
+
+      label{
+        @include flex-direction(column);
+        cursor: pointer;
+      }
+
+      span {
+        display: block;
+        width: 33px;
+        height: 4px;
+        margin-top: 3px;
+        margin-bottom: 3px;
+        position: relative;
+
+        background: white;
+        border-radius: 3px;
+
+        z-index: 1;
+
+        transform-origin: 4px 0px;
+
+        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                    background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                    opacity 0.55s ease;
+
+        &:first-child {
+          transform-origin: 0% 0%;
+        }
+
+        &:nth-last-child(2) {
+          transform-origin: 0% 100%;
+        }
+      }
+    }
+
+    .container {
+      @include align-items(flex-end);
+
+      @include breakpoint(mobile) {
+        @include flex-direction(column);
+        @include justify-content(flex-start);
+        background-color: $store-space-red;
+        position: relative;
+        top: 0;
+        left: 101%;
+        padding-top: 30px;
+        pointer-events: all;
+        @include transition(left .25s ease 0s);
+      }
+    }
+
+    #menu-checkbox:checked ~ div.container {
+      left: 0;
+    }
+
+    #menu-checkbox:checked ~ .menu label span
+    {
+      opacity: 1;
+      @include transform(rotate(45deg) translate(0, 0));
+      background: $store-space-red;
+    }
+
+     #menu-checkbox:checked ~ .menu label span:nth-of-type(2)
+    {
+      opacity: 0;
+      @include transform(rotate(0deg) scale(0.01, 0.01));
+    }
+
+     #menu-checkbox:checked ~ .menu label span:last-of-type
+    {
+      @include transform(rotate(-45deg) translate(-3px, -2px));
+    }
+
+
+    .nav-item {
+      letter-spacing: 1px;
+      padding: 5px 0;
+      text-transform: uppercase;
+
+      border-bottom: 3px solid transparentize($store-space-red, 0.9);
+      margin-bottom: 0;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      padding-bottom: 16px;
+
+      &:hover {
+        border-bottom-color: $white;
+      }
+
+      @include breakpoint(mobile) {
+        font-size: 22px;
+        padding: 20px 0;
+        margin: 20px 0;
+        border-bottom: 1px solid transparentize($store-space-yellow, 0.1);
+      }
+
+    }
+  }
+}

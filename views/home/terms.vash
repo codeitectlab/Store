@@ -1,0 +1,89 @@
+@html.extend('layouts/main', function(model) {
+  @html.block('body', function(model) {
+<div class="container terms">
+
+<h3>
+Terms and Conditions
+</h3>
+
+<h4>
+Additional Contact
+</h4>
+<ol>
+<li>
+By clicking on the "continue" button, you acknowledge that your information will be forwarded to a sales agent of Store Space
+</li>
+<li>
+Upon receipt of your information, a sales agent of Store Space may contact you via phone or email to solicit your business and determine whether they can be of assistance to you in reserving or renting a storage unit from Store Space.
+</li>
+<li>
+Your information will not be passed on to third parties and will be used only by Store Space.
+</li>
+</ol>
+
+<h4>
+Unit information
+</h4>
+<ol>
+<li>
+All unit sizes are approximate.
+</li>
+<li>
+Prior to a signed lease, we reserve the right to make unit substitutions or to cancel any reservation or hold.
+</li>
+<li>
+Facility features vary by location. Customers should contact individual locations to confirm features of a particular facility.
+</li>
+<li>
+All specials displayed or otherwise advertised are based upon unit availability and unit size.
+</li>
+</ol>
+
+<h4>
+Reservation process
+</h4>
+<p>
+A reservation will guarantee your unit details, including the square footage, rate and potential savings; however, we reserve the right to cancel your reservation prior to a signed lease.
+</p>
+
+<h4>
+First Month Free, First Month Half Off, and First Two Months Free
+</h4>
+<p>
+First Month Free offer may not be available on all unit sizes and is applicable to one month's rent on new rentals by new customers only.
+</p>
+<p>
+First Month Half Off offer may not be available on all unit sizes and is applicable to half of a month's rent on new rentals by new customers only.
+</p>
+<p>
+First Two Months Free offer may not be available on all unit sizes and is applicable to new rentals by new customers only. New customers may be required to pay for the third month off the unit rental upfront to qualify for the promotion.
+</p>
+<p>
+These offers both exclude applicable administration and insurance fees. Not valid with any other discount offers. Offer has no cash value. Features may vary by location. Void where prohibited. Offer subject to termination without notice. See manager for details.
+</p>
+
+<h4>
+About Our Prices
+</h4>
+<p>
+Online prices and selection generally match our retail stores, but may vary. Prices and offers are subject to change. Pricing, offers and discounts are available to new customers only and not available for existing customers transferring units.
+</p>
+
+<h4>
+General website terms and conditions
+</h4>
+<ol>
+<li>
+This site is provided by Store Space on an "as is" basis and Store Space makes no representations or warranties of any kind. Store Space is not responsible for technical, hardware or software failures of any kind; lost or unavailable network connections; or delayed computer transmissions. Store Space will not be liable for any damages or injury that result from the use of this website or the materials on this site.
+</li>
+<li>
+Our website may contain links to sites not maintained by Store Space. Store Space makes no representations or warranties about any other web site. Store Space has no control over the content of any outside websites, even if accessed through this website. In addition, a link to an outside website does not mean Store Space endorses the content, or the use, of such web site.
+</li>
+<li>
+We reserve the right to make changes to our website and these terms and conditions at any time.
+</li>
+</ol>
+
+</div>
+  })
+})

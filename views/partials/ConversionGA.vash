@@ -1,0 +1,4 @@
+<!-- Event snippet for Lead Submission conversion page -->
+<script>
+  gtag('event', 'conversion', {'send_to': 'AW-822959418/S52HCK78s4ABELq6tYgD'});
+</script>

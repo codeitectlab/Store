@@ -1,0 +1,41 @@
+<div class="container reserve">
+  <div class="heading">Reserve A Unit</div>
+  <div class="details">
+    <div class="unit-details">
+      <div class="heading">Unit Information</div>
+      <div class="row">
+        @html.include('partials/reservations/unitInformation', model)
+      </div>
+    </div>
+    <div class="tenant-details">
+      <div class="heading">Your Information</div>
+      <div class="container">
+        <form method="POST" action="/reserve/date" id="reservation-form">
+          <input type="hidden" name="unitId" value="@model.unit.UnitID">
+          <input type="hidden" name="unitTypeId" value="@model.unit.UnitTypeID">
+          <input type="hidden" name="siteId" value="@model.unit.SiteID">
+          <input type="hidden" name="locationCode" value="@model.unit.sLocationCode">
+          <input type="hidden" id="unit-width" name="unitWidth" value="@model.unit.dcWidth">
+          <input type="hidden" id="unit-length" name="unitLength" value="@model.unit.dcLength">
+          <label for="first-name" class="required">First Name <span class="validation-failed"></span></label>
+          <input type="text" id="first-name" name="firstName">
+          <label for="last-name" class="required">Last Name <span class="validation-failed"></span></label>
+          <input type="text" id="last-name" name="lastName">
+          <label for="email" class="required">Email <span class="validation-failed"></span></label>
+          <input type="email" id="email" name="email">
+          <div class="phone-move-in">
+            <div>
+              <label for="phone" class="required">Phone Number <span class="validation-failed"></span></label>
+              <input type="text" id="phone" name="phone">
+            </div>
+            <div>
+              <label for="move-in-date" class="required">Move-In Date <span class="validation-failed"></span></label>
+              <input type="text" id="move-in-date" data-date-picker="true" name="moveInDate">
+            </div>
+          </div>
+          <input type="submit" class="store-space-button" value="NEXT" id="submit-reservation">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+.map{
+  .background {
+    fill: none;
+    pointer-events: all;
+  }
+
+  .feature {
+    fill: #aabec8;
+    cursor: pointer;
+  }
+
+  .feature.active {
+    fill: #00669a;
+  }
+
+  .mesh {
+    fill: none;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .state-label {
+    fill: #dfdfdf;
+    fill-opacity: 1;
+    font-size: 0.5rem;
+    text-anchor: middle;
+    cursor: pointer;
+  }
+}

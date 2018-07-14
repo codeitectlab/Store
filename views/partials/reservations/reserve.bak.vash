@@ -1,0 +1,129 @@
+<div class="container reserve">
+  <div class="heading">Reserve A Unit</div>
+  <div class="text hidden">
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque in justo. In mattis, turpis in tempor scelerisque, dui turpis tincidunt magna, lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque in justo. In mattis, turpis in tempor scelerisque, dui turpis tincidunt magna,
+  </div>
+  <div class="filters hidden">
+    <div class="filter">
+      <label></label>
+      <input type="text" class="value">
+    </div>
+    <div class="filter">
+      <label></label>
+      <input type="text" class="value">
+    </div>
+    <div class="filter">
+      <label></label>
+      <input type="text" class="value">
+    </div>
+    <div class="filter">
+      <label></label>
+      <input type="text" class="value">
+    </div>
+  </div>
+  <div class="details">
+    <div class="unit-details">
+      <div class="heading">Unit Information</div>
+      <div class="row">
+        <div class="location">
+          <div>Location:</div>
+          <div>@model.site.sSiteAddr1</div>
+          @if(model.site.sSiteAddr2){
+            <div>@model.site.sSiteAddr2</div>
+          }
+          <div>@model.site.sSiteCity, @model.site.sSiteRegion @model.site.sSitePostalCode</div>
+        </div>
+        <div class="contact">
+          <div>Contact:</div>
+          <div><a href="tel:@model.site.sSitePhone">@model.site.sSitePhone</a></div>
+          <div><a href="mailto:@model.site.sEmailAddress">@model.site.sEmailAddress</a></div>
+        </div>
+      </div>
+      <div class="spacer"></div>
+      <div class="row">
+        @{
+          weekday = 'Closed'
+          sat = 'Closed'
+          sun = 'Closed'
+
+
+          if(!model.site.bClosedWeekdays){
+            array = model.site.tWeekdayStrt.split(':')
+            weekday = array[0] + ':' + array[1]
+            array = model.site.tWeekdayEnd.split(':')
+            weekday = weekday + ' - ' + array[0] + ':' + array[1]
+          }
+
+          if(!model.site.bClosedSaturday){
+            array = model.site.tSaturdayStrt.split(':')
+            sat = array[0] + ':' + array[1]
+            array = model.site.tSaturdayEnd.split(':')
+            sat = sat + ' - ' + array[0] + ':' + array[1]
+          }
+
+          if(!model.site.bClosedSunday){
+            array = model.site.tSundayStrt.split(':')
+            sun = array[0] + ':' + array[1]
+            array = model.site.tSundayEnd.split(':')
+            sun = sun + ' - ' + array[0] + ':' + array[1]
+          }
+        }
+        <div class="office-hours">
+          <div>Office Hours:</div>
+          <div>M-F: @weekday</div>
+          <div>Sat: @sat</div>
+          <div>Sun: @sun</div>
+        </div>
+        <div class="access-hours">
+          <div>Access Hours:</div>
+          <div>M-F: 6:00 - 10:00</div>
+          <div>Sat: 6:00 - 10:00</div>
+          <div>Sun: 6:00 - 10:00</div>
+        </div>
+      </div>
+      <div class="spacer"></div>
+      <div class="row">
+        <div class="unit-features">
+          <div>Unit Features:</div>
+            @model.unit.features.forEach(function(feature){
+              <div>@feature</div>
+            })
+        </div>
+        <div class="unit-info">
+          <div>Unit Info:</div>
+          <div class="size">@model.unit.dcWidth' x @model.unit.dcLength'</div>
+          <div class="price">@html.formatCurrency(model.unit.dcPushRate)/mo</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="tenant-details">
+      <div class="heading">Your Information</div>
+      <form method="POST" action="/confirm" id="reservation-form">
+        <input type="hidden" name="unitId" value="@model.unit.UnitID">
+        <input type="hidden" name="unitTypeId" value="@model.unit.UnitTypeID">
+        <input type="hidden" name="siteId" value="@model.unit.SiteID">
+        <input type="hidden" name="locationCode" value="@model.unit.sLocationCode">
+        <label for="first-name" class="required">First Name <span class="validation-failed"></span></label>
+        <input type="text" id="first-name" name="firstName">
+        <label for="last-name" class="required">Last Name <span class="validation-failed"></span></label>
+        <input type="text" id="last-name" name="lastName">
+        <label for="email" class="required">Email <span class="validation-failed"></span></label>
+        <input type="email" id="email" name="email">
+        <div class="phone-move-in">
+          <div>
+            <label for="phone" class="required">Phone Number <span class="validation-failed"></span></label>
+            <input type="text" id="phone" name="phone">
+          </div>
+          <div>
+            <label for="move-in-date" class="required">Move-In Date <span class="validation-failed"></span></label>
+            <input type="text" id="move-in-date" data-date-picker="true" name="moveInDate">
+          </div>
+        </div>
+        <input type="submit" value="SUBMIT" id="submit-reservation">
+      </form>
+
+    </div>
+  </div>
+  <div class="next-steps"></div>
+</div>

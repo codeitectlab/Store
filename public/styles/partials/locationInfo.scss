@@ -1,0 +1,350 @@
+.location-info {
+  margin: 0 auto 20px auto;
+
+  > .heading {
+    @include display-flex();
+    @include justify-content(space-between);
+    @include flex-direction(row);
+    margin-top: 50px;
+    border-bottom: 1px solid $store-space-gray;
+
+    @include breakpoint(mobile) {
+      @include flex-direction(column);
+      @include justify-content(center);
+      @include align-items(center);
+
+      border-bottom: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .left{
+      @include flex-grow(1);
+
+      @include breakpoint(mobile) {
+        width: 100%;
+      }
+
+      .location{
+        font-family: Raleway, sans-serif;
+        font-size: 32px;
+        font-weight: bold;
+        line-height: 120%;
+        color: $store-space-blue;
+        margin-bottom: 10px;
+
+        @include breakpoint(mobile) {
+          padding-bottom: 20px;
+          border-bottom: 1px solid $store-space-gray;
+        }
+      }
+
+      .address {
+        @include display-flex();
+        @include align-items(flex-start);
+
+        @include breakpoint(mobile) {
+          display: none;
+//          @include flex-direction(column);
+        }
+
+        .street {
+          font-size: 17px;
+          color: $black;
+          margin-bottom: 20px;
+          margin-right: 10px;
+
+          @include breakpoint(mobile) {
+            margin: 20px auto 5px auto;
+            text-align: center;
+          }
+        }
+        .get-directions {
+          font-size: 17px;
+          font-weight: bold;
+          color: $store-space-red;
+          text-align: center;
+
+          @include breakpoint(mobile) {
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+
+    .right {
+      @include display-flex();
+      @include flex-direction(column);
+      @include justify-content(flex-end);
+      @include align-items(flex-end);
+
+      @include breakpoint(mobile) {
+        width: 100%;
+        margin-top: 10px;
+        @include align-items(center);
+      }
+
+      a{
+        color: $store-space-red;
+//        margin: 0 auto 20px auto;
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-weight: bold;
+
+        &.phone {
+          font-family: Montserrat, sans-serif;
+          font-size: 24px;
+          margin-bottom: 10px;
+//          margin: 0 0 10px 0;
+        }
+      }
+    }
+  }
+
+  .info {
+    @include display-flex();
+    @include flex-direction(row);
+    @include justify-content(space-between);
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    @include breakpoint(mobile) {
+      @include flex-direction(column);
+      margin-top: 10px;
+    }
+
+    .column {
+      @include display-flex();
+      @include flex-direction(column);
+      @include justify-content(flex-start);
+
+      @include breakpoint(mobile) {
+        margin-bottom: 20px;
+      }
+
+    }
+
+    > .left {
+      @include breakpoint(mobile) {
+        border-bottom: 1px solid $store-space-gray;
+      }
+    }
+
+    .left {
+      @include display-flex();
+      @include flex-direction(column);
+      width: calc(25% - 20px);
+      margin-right: 20px;
+
+      @include breakpoint(mobile) {
+        @include flex-direction(row);
+        width: 100%;
+        margin-right: 0;
+      }
+
+      > .row {
+        @include display-flex();
+        @include flex-direction(column);
+        border-top: 1px solid $store-space-gray;
+        margin-bottom: 20px;
+        padding-top: 20px;
+
+        &:first-of-type {
+          border-top: none;
+//          padding-top: 100%;
+        }
+
+        @include breakpoint(mobile) {
+          border-top: none;
+        }
+
+        &.address{
+          display: none;
+          padding-top: 0;
+          @include justify-content(center);
+
+          @include breakpoint(mobile) {
+            @include display-flex();
+            width: 35%;
+          }
+        }
+
+        .street {
+          font-size: 17px;
+          color: $black;
+          margin-bottom: 20px;
+          margin-right: 10px;
+
+          @include breakpoint(mobile) {
+            margin: 20px 0 0 0;
+            text-align: left;
+          }
+        }
+        .get-directions {
+          font-size: 17px;
+          font-weight: bold;
+          color: $store-space-red;
+          margin-bottom: 10px;
+//          text-align: center;
+
+          @include breakpoint(mobile) {
+            margin: 0;
+          }
+        }
+
+        &.carousel {
+          padding-top: 0;
+          border-top: none;
+
+          @include breakpoint(mobile) {
+            width: 65%;
+          }
+
+          > div > div {
+            height: 100%;
+
+            > div {
+              height: 100%;
+              text-align: center;
+              @include display-flex();
+              @include align-items(center);
+              @include justify-content(center);
+
+              img {
+                max-height: 100%;
+                max-width: 100%;
+              }
+
+            }
+          }
+        }
+
+        .address-map {
+          border: 1px solid $store-space-gray;
+//          position: absolute;
+//          top: 0;
+//          right: 0;
+//          bottom: 0;
+//          left: 0;
+        }
+
+        &.hours{
+          font-size: 16px;
+          color: $black;
+
+          @include breakpoint(mobile) {
+            display: none;
+          }
+
+
+          > div {
+            margin-bottom: 10px;
+          }
+
+          .label {
+            font-weight: bold;
+            color: $store-space-blue;
+            margin-bottom: 20px;
+          }
+        }
+      }
+
+    }
+
+    .right {
+      width: 75%;
+
+      @include breakpoint(mobile) {
+        width: 100%;
+      }
+
+      .heading {
+        @include display-flex();
+        @include flex-direction(row);
+        @include flex-wrap(wrap);
+        @include align-items(flex-start);
+        @include justify-content(flex-start);
+
+        @include breakpoint(mobile) {
+          @include align-items(center);
+        }
+
+        input {
+          visibility: hidden;
+          opacity: 0.01;
+          display: none;
+        }
+
+        label {
+          @include display-flex();
+          @include align-items(center);
+          font-size: 28px;
+          font-family: Raleway, sans-serif;
+          font-weight: bold;
+          color: $store-space-blue;
+//          margin-bottom: 10px;
+          width: 100%;
+          height: 90px;
+          background-color: #f2f2f2;
+          border-radius: 5px 5px 0px 0px;
+          border-bottom: 1px solid $store-space-blue;
+
+          &:hover {
+            cursor: pointer;
+          }
+
+          &[for="more-info-checkbox"] {
+            display: none;
+
+            @include breakpoint(mobile) {
+              @include display-flex();
+            }
+          }
+
+          @include breakpoint(mobile) {
+            width: 50%;
+            height: 50px;
+            font-size: 22px;
+            margin-bottom: 0;
+            text-align: center;
+            @include justify-content(center);
+          }
+
+        }
+        div.tabs {
+          width: 100%;
+          background-color: $white;
+
+          #available-units,
+          #more-info {
+            display: none;
+          }
+        }
+
+        #available-units-checkbox:checked + label,
+        #more-info-checkbox:checked + label {
+          background-color: $store-space-blue;
+          color: $white;
+        }
+
+        #available-units-checkbox:checked ~ .tabs #available-units,
+        #more-info-checkbox:checked ~ .tabs #more-info {
+          display: block;
+        }
+
+        .text {
+          color: white;
+
+          @include breakpoint(mobile) {
+            display: none;
+          }
+
+          .yellow {
+            color: $store-space-yellow;
+          }
+        }
+      }
+
+    }
+  }
+}

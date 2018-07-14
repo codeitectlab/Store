@@ -1,0 +1,45 @@
+.filters {
+  display: block;
+  margin: 3em auto;
+  max-width: 1200px;
+  text-align: center;
+  width: 100%;
+
+  div {
+    background-color: $blue-general;
+    color: $white;
+    display: inline-block;
+    margin: 10px;
+    transform: skewX(-20deg);
+    // -moz-transform: skew(-20deg);
+    // -o-transform: skew(-20deg);
+    // -webkit-transform: skew(-20deg);
+
+    input {
+      display: none;
+    }
+
+    label {
+      display: inline-block;
+      font-size: 16px;
+      letter-spacing: .14rem;
+      padding: 5px 0 5px 15px;
+      text-transform: uppercase;
+      transform: skewX(20deg);
+
+      &::after {
+        background-color: $white;
+        content: '\2714\0020';
+        display: inline-block;
+        font-size: 16px;
+        margin: 0 5px 0 15px;
+        transform: skewX(-20deg);
+        width: 30px;
+      }
+    }
+  }
+
+  input:checked + label::after {
+    color: $nav-bar;
+  }
+}

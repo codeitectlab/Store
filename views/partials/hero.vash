@@ -1,0 +1,11 @@
+<div class="hero @(model.classes)" style="@(model.style)">
+  <img src="@(html.staticFilePath)/images/@(model.imgSrc)">
+
+  @if(model.overlayPartial) {
+    <div class="background">
+      <div class="overlay">
+        @html.include('partials/' + model.overlayPartial.type, model.overlayPartial.model)
+      </div>
+    </div>
+  }
+</div>

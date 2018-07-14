@@ -1,0 +1,47 @@
+.hero {
+  width: 100%;
+  display: block;
+  position: relative;
+  min-height: 300px;
+  margin-bottom: 20px;
+
+  @include breakpoint(mobile) {
+    margin-top: 0 !important;
+  }
+
+  img {
+    width: 100%;
+    z-index: -1;
+  }
+
+  .overlay {
+    position: absolute;
+    margin: 0 auto;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+
+    @include breakpoint(mobile) {
+      width: 95%;
+    }
+
+  }
+
+  &.overlay-with-gray-background .background,
+  &.overlay-with-blue-background .background {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+  }
+
+  &.overlay-with-blue-background .background {
+    background-color: transparentize($store-space-blue, 0.5);
+  }
+
+  &.overlay-with-gray-background .background {
+    background-color: transparentize($black, 0.8);
+  }
+
+}

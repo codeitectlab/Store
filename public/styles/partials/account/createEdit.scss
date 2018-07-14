@@ -1,0 +1,87 @@
+.create-edit-thanks {
+  @include display-flex();
+  @include justify-content(center);
+  @include flex-direction(column);
+  width: 450px;
+
+  .heading {
+    @include display-flex();
+    @include justify-content(center);
+    @include align-items(center);
+    height: 60px;
+    background-color: $store-space-blue;
+    color: $white;
+    font-family: Raleway, sans-serif;
+    font-weight: bold;
+    font-size: 26px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+  }
+
+  .fields {
+    background-color: $white;
+    padding: 20px 0 0 20px;
+
+    input, button, select, option {
+      width: 100%;
+    }
+  }
+
+  h3 {
+    color: $store-space-blue;
+    text-align: center;
+    margin: 20px auto;
+  }
+
+  a.store-space-button-secondary {
+    margin: 20px auto;
+    border: none;
+  }
+}
+
+.create-edit {
+  @include display-flex();
+  @include justify-content(center);
+  @include flex-direction(column);
+  width: 750px;
+
+  .heading {
+    @include display-flex();
+    @include justify-content(center);
+    @include align-items(center);
+    height: 60px;
+    background-color: rgba(0, 31, 96, 1);
+    color: $white;
+    font-family: Raleway, sans-serif;
+    font-weight: bold;
+    font-size: 26px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+  }
+
+  .message {
+    @include display-flex();
+    @include justify-content(center);
+    @include align-items(center);
+    background-color: $store-space-yellow;
+    color: $store-space-red;
+    padding: 10px 20px;
+  }
+
+  .fields {
+    background-color: $white;
+    padding: 20px 0 0 20px;
+
+    label {
+      color: $black;
+      font-size: 16px;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input, button, select, option {
+      width: 100%;
+    }
+  }
+}

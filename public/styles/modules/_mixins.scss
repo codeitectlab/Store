@@ -1,0 +1,187 @@
+@mixin vendor-prefix($name, $argument) {
+  -webkit-#{$name}: $argument;
+  -moz-#{$name}: $argument;
+  -ms-#{$name}: $argument;
+  -o-#{$name}: $argument;
+  #{$name}: $argument;
+}
+
+@mixin border-radius($radius) {
+  @include vendor-prefix(border-radius, $radius);
+}
+
+@mixin box-shadow($shadow) {
+  @include vendor-prefix(box-shadow, $shadow);
+}
+
+@mixin box-sizing($sizing) {
+  @include vendor-prefix(box-sizing, $sizing);
+}
+
+@mixin column-count($count) {
+  @include vendor-prefix(column-count, $count);
+}
+
+@mixin appearance($appearance) {
+  @include vendor-prefix(appearance, $appearance);
+}
+
+@mixin transition($transition) {
+  @include vendor-prefix(transition, $transition);
+}
+
+@mixin transform($transform) {
+  @include vendor-prefix(transform, $transform);
+}
+
+@mixin transform-origin($origin) {
+  @include vendor-prefix(transform-origin, $origin);
+}
+
+@mixin backface-visibility($visibility) {
+  @include vendor-prefix(backface-visibility, $visibility);
+}
+
+/* animations */
+@mixin animation($animate...) {
+  $max: length($animate);
+  $animations: '';
+
+  @for $i from 1 through $max {
+      $animations: #{$animations + nth($animate, $i)};
+
+      @if $i < $max {
+          $animations: #{$animations + ", "};
+      }
+  }
+
+  @include vendor-prefix(animation, $animations);
+}
+
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {
+      @content;
+  }
+  @-moz-keyframes #{$animationName} {
+      @content;
+  }
+  @-o-keyframes #{$animationName} {
+      @content;
+  }
+  @keyframes #{$animationName} {
+      @content;
+  }
+}
+
+@include keyframes(slideUp) {
+  from { max-height: 1000px; }
+  to { max-height: 0; }
+}
+
+@include keyframes(slideDown) {
+  from { max-height: 0; }
+  to { max-height: 1000px; }
+}
+
+@include keyframes(fadeIn) {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@include keyframes(fadeOut) {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@include keyframes(rotate) {
+  from { @include transform(rotate(0)); }
+  to { @include transform(rotate(360deg)); }
+}
+
+/* breakpoints */
+@mixin breakpoint($point) {
+  @if $point == tablet {
+    @media (max-width: #{map-get($breakpoints, tablet)}) { @content; }
+  } @else if $point == mobile {
+    @media (max-width: #{map-get($breakpoints, mobile)}) { @content; }
+  } @else {
+    @media (max-width: $point) { @content; }
+  }
+}
+
+@mixin inverse-breakpoint($point) {
+  @if $point == tablet {
+    @media (min-width: #{map-get($breakpoints, tablet)}) { @content; }
+  } @else if $point == mobile {
+    @media (min-width: #{map-get($breakpoints, mobile)}) { @content; }
+  } @else {
+    @media (min-width: $point) { @content; }
+  }
+}
+
+@mixin remove-number-spinners() {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+//  margin: 0;
+  -moz-appearance: textfield;
+}
+
+/* flex parent */
+@mixin display-flex() {
+  -js-display: flex; // flexibility polyfill
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex-direction($value) {
+  @include vendor-prefix(flex-direction, $value);
+}
+
+@mixin flex-wrap($value) {
+  @include vendor-prefix(flex-wrap, $value);
+}
+
+@mixin flex-flow($value) {
+  @include vendor-prefix(flex-flow, $value);
+}
+
+@mixin justify-content($value) {
+  @include vendor-prefix(justify-content, $value);
+}
+
+@mixin align-items($value) {
+  @include vendor-prefix(align-items, $value);
+}
+
+@mixin align-content($value) {
+  @include vendor-prefix(align-content, $value);
+}
+
+/* flex child */
+@mixin order($value) {
+  @include vendor-prefix(order, $value);
+}
+
+@mixin flex-grow($value) {
+  @include vendor-prefix(flex-grow, $value);
+}
+
+@mixin flex-shrink($value) {
+  @include vendor-prefix(flex-shrink, $value);
+}
+
+@mixin flex-basis($value) {
+  @include vendor-prefix(flex-basis, $value);
+}
+
+@mixin flex($value) {
+  @include vendor-prefix(flex, $value);
+}
+
+@mixin align-self($value) {
+  @include vendor-prefix(align-self, $value);
+}

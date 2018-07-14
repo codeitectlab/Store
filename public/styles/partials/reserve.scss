@@ -1,0 +1,548 @@
+.reserve {
+  margin: 50px auto 75px auto;
+
+  .heading {
+    font-family: Raleway, sans-serif;
+    font-weight: bold;
+    font-size: 40px;
+    color: $store-space-blue;
+    margin-bottom: 20px;
+    line-height: 1px;
+  }
+
+  .text {
+    font-size: 16px;
+    color: $black;
+    margin-bottom: 20px;
+  }
+
+  .details {
+    display: inline-block;
+    width: 100%;
+
+    @include breakpoint(mobile) {
+      @include flex-direction(column);
+    }
+
+    padding-top: 20px;
+    border-top: 1px solid $store-space-light-blue;
+
+    .heading {
+      @include display-flex();
+      @include align-items(center);
+      @include justify-content(center);
+      background-color: $store-space-blue;
+      color: $white;
+      text-align: center;
+      font-family: Raleway, sans-serif;
+      font-size: 24px;
+      font-weight: bold;
+      border-radius: 8px 8px 0 0;
+      height: 50px;
+    }
+
+    .unit-details,
+    .tenant-details {
+      position: relative;
+      width: calc(50% - 20px);
+      float: left;
+      border: 1px solid $store-space-blue;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      padding-bottom: 20px;
+      @include display-flex();
+      @include flex-direction(column);
+      @include justify-content(space-between);
+
+      @include breakpoint(mobile) {
+        width: 100%;
+      }
+
+      .spacer {
+        border-top: 1px solid $store-space-light-blue;
+        margin: 20px;
+      }
+
+      .screen {
+        .row {
+          margin-right: 0;
+        }
+
+        .name {
+          width: 100%;
+          color: $store-space-blue;
+          font-size: 18px;
+          font-weight: bold;
+          margin-bottom: 20px;
+          display: block;
+/*
+          &:before {
+            content: '\25B8';
+            color: $store-space-blue;
+            margin-right: 5px;
+          }
+
+          &:hover {
+            cursor: pointer;
+          }
+*/
+        }
+        .fields {
+          display: block;
+          margin-bottom: 20px;
+
+          .card-number-container{
+            label {
+              width: 100%;
+
+              .card-types {
+                float: right;
+
+                .card-type {
+                  display: none;
+                  margin-left: 5px;
+                  height: 15px;
+                }
+              }
+            }
+
+            &.visa {
+              .card-type.visa {
+                display: inline-block;
+              }
+            }
+            &.master-card {
+              .card-type.master-card {
+                display: inline-block;
+              }
+            }
+            &.american-express {
+              .card-type.american-express {
+                display: inline-block;
+              }
+            }
+            &.discover {
+              .card-type.discover {
+                display: inline-block;
+              }
+            }
+            &.diners-club {
+              .card-type.diners-club {
+                display: inline-block;
+              }
+            }
+
+
+          }
+
+          .autopay {
+            margin-bottom: 20px;
+
+            .column {
+              @include flex-direction(row);
+
+              input {
+                margin-bottom: 0;
+              }
+            }
+          }
+        }
+/*
+        &.active {
+          .fields {
+            display: block;
+          }
+
+          .name:before {
+            content: '\25BE';
+          }
+        }
+*/
+        &.screen-3 {
+          a.button {
+            font-size: 18px;
+            font-weight: normal;
+            margin-bottom: 10px;
+          }
+        }
+      }
+
+      .bottom-border {
+        border-bottom: 1px solid $store-space-yellow;
+      }
+
+      .row {
+        @include display-flex();
+        @include flex-direction(row);
+        @include justify-content(space-between);
+        margin: 0 20px;
+
+        .column {
+          @include display-flex();
+          @include flex-direction(column);
+          @include justify-content(space-between);
+        }
+
+        input,
+        a.button {
+          width: 100%;
+        }
+
+        .location, .contact,
+        .office-hours, .access-hours,
+        .unit-features, .unit-info {
+          width: 49.5%;
+          text-align: center;
+
+          div {
+            font-weight: bold;
+            color: $store-space-blue;
+            font-size: 18px;
+            margin-bottom:5px;
+
+            a{
+              font-weight: bold;
+              color: $store-space-blue;
+              font-size: 18px;
+            }
+
+            &:first-of-type {
+              font-style: italic;
+              font-weight: normal;
+              color: $store-space-red;
+              margin-bottom: 10px;
+            }
+
+            &:last-of-type {
+              margin-bottom: 0;
+            }
+          }
+
+          .size {
+            font-family: Raleway, sans-serif;
+            font-size: 40px;
+            font-weight: bold;
+            line-height: 100%;
+            margin-bottom: 10px;
+            display: inline-block;
+          }
+
+          .price {
+            font-size: 26px;
+            font-weight: bold;
+            line-height: 100%;
+            color: $store-space-red;
+            margin-top: 10px;
+            display: inline-block;
+          }
+        }
+      }
+
+      form {
+        @include display-flex();
+        @include flex-direction(column);
+
+        .insurance-range-container {
+          @include flex-direction(column);
+          margin: 20px 0;
+
+          label {
+            margin-bottom: 10px;
+          }
+
+          #insurance-range {
+            width: 85%;
+          }
+
+          .coverage {
+            margin: 10px 10px 0 10px;
+            font-size: 18px;
+          }
+
+          .premium {
+            margin: 10px;
+            font-size: 18px;
+            font-weight: bold;
+          }
+
+          .approval {
+            margin: 0 10px 10px 10px;
+            font-size: 14px;
+            text-align: center;
+          }
+
+          .insurance-range-min-max {
+            @include justify-content(space-between);
+            width: 100%;
+            position: relative;
+            height: 40px;
+
+            &:before {
+              position: absolute;
+              left: 0;
+              top: -20px;
+              content: attr(data-min-premium);
+              color: $store-space-blue;
+            }
+
+            &:after {
+              position: absolute;
+              right: 0;
+              top: -20px;
+              content: attr(data-max-premium);
+              color: $store-space-blue;
+            }
+          }
+
+        }
+
+        input {
+          font-size: 16px;
+          margin-bottom: 20px;
+        }
+/*
+        input[type="submit"] {
+          text-transform: uppercase;
+          background-color: #be1e2d;
+          border-radius: 3px;
+          font-family: Raleway,sans-serif;
+          font-weight: 900;
+          font-size: 24px;
+          letter-spacing: 1px;
+          color: white;
+          border: none;
+          @include box-shadow(0 3px $store-space-red-shadow);
+
+        }
+*/
+        .phone-move-in {
+          @include display-flex();
+          @include flex-direction(row);
+          @include justify-content(space-between);
+
+          @include breakpoint(tablet) {
+            @include flex-direction(column);
+            width: 100%;
+          }
+
+          div {
+            @include display-flex();
+            @include flex-direction(column);
+            width: 49%;
+
+            @include breakpoint(tablet) {
+              width: 100%;
+            }
+          }
+        }
+
+        .validation-failed {
+          float: right;
+          color: $store-space-red;
+          font-size: 13px;
+        }
+      }
+    }
+
+    .tenant-details {
+      float: right;
+    }
+
+    .unit-details {
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+
+        tr {
+
+          &.unit-info td,
+          &.rate-info td{
+            color: $store-space-blue;
+            font-size: 18px;
+            font-weight: bold;
+            font-family: Raleway, sans-serif;
+          }
+
+          &.monthly-total td:first-of-type,
+          &.total-today td:first-of-type{
+            color: $store-space-red;
+            font-size: 18px;
+            font-weight: bold;
+          }
+
+          &.bottom-border {
+            + tr td {
+              padding-top: 20px;
+            }
+            td{
+              padding-bottom: 20px;
+              margin-top: 10px;
+              border-bottom: 1px solid $store-space-yellow;
+            }
+          }
+
+          td {
+            padding: 10px 0;
+
+            &.promo-name {
+              color: $store-space-green;
+            }
+
+            &:last-of-type {
+              width: 40%;
+              text-align: right;
+            }
+            &:first-of-type {
+              width: 60%;
+              text-align: left;
+            }
+          }
+        }
+      }
+      @include breakpoint(mobile) {
+        &:after {
+
+        }
+      }
+
+    }
+
+    .reservation-type-selector {
+      height: calc(100% - 50px);
+      @include display-flex();
+      @include flex-direction(column);
+      @include justify-content(space-around);
+
+      .separator {
+        width: 100%;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid $store-space-yellow;
+
+        &:after {
+          position: absolute;
+          content: 'OR';
+          background-color: white;
+          padding: 0 10px;
+          transform: translate(-50%, 0);
+          left: 50%;
+        }
+      }
+
+      > label {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+
+        .title {
+          color: $store-space-blue;
+          font-size: 18px;
+          font-weight: bold;
+          padding: 10px 0;
+/*
+          &:before {
+            display: inline-block;
+            content: '\25CB';
+            color: $store-space-blue;
+            font-size: 20px;
+            margin-right: 5px;
+            width: 12.5px;
+          }
+*/        }
+        .description {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  input[readonly],
+  input[type="text"]:disabled {
+    background: #DDDDDD;
+  }
+}
+
+.confirm {
+  margin: 50px auto;
+
+  .details{
+    margin-bottom: 20px;
+
+    .tenant-details {
+      .container{
+        @include flex-grow(1);
+
+        .thanks {
+          font-family: Raleway, sans-serif;
+          font-weight: bold;
+          font-size: 38px;
+          color: $store-space-red;
+          line-height: 100%;
+          margin-bottom: 10px;
+        }
+
+        .confirmation {
+          font-weight: bold;
+          font-size: 20px;
+          color: $store-space-red;
+          line-height: 100%;
+          margin-bottom: 20px;
+        }
+
+        .text {
+          font-size: 16px;
+          color: $black;
+          line-height: 100%;
+        }
+
+        .spacer {
+          margin: 10px 0;
+        }
+
+        .tenant-info,
+        .move-in-date {
+          margin-bottom:20px;
+
+          div {
+            font-weight: bold;
+            color: $store-space-blue;
+            font-size: 18px;
+            margin-bottom: 5px;
+
+            &:first-of-type {
+              font-weight: normal;
+              font-style: italic;
+              color: $store-space-red;
+              margin-bottom: 10px;
+            }
+
+          }
+
+        }
+      }
+    }
+  }
+
+  .next-steps {
+    margin-bottom: 20px;
+
+    div{
+      font-size: 16px;
+      color: $black;
+      margin-bottom: 5px;
+
+      &:first-of-type {
+        font-size: 18px;
+        color: $store-space-blue;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  input[type="text"]:disabled {
+    background: #DDDDDD;
+  }
+}

@@ -1,0 +1,103 @@
+<div class="container reserve">
+  <div class="heading">Reserve A Unit</div>
+  <div class="details">
+    <div class="unit-details">
+      <div class="heading">Unit Information</div>
+      <div class="row">
+        @html.include('partials/reservations/unitInformation', model)
+      </div>
+    </div>
+    <div class="tenant-details">
+      <div class="heading">Online Reservation</div>
+      <div class="reservation-type-selector">
+        <div class="reservation" id="reserve-online">
+          <form method="POST" action="/reserve/online-esign" id="reservation-form">
+            <div class="screen screen-2 active">
+              <div class="row"><div class="column">
+                <a class="name">Billing Information</a>
+              </div></div>
+              <div class="fields">
+                <div class="row"><div class="column">
+                  <label for="card-holder" class="required">Card Holder Name <span class="validation-failed"></span></label>
+                  <input type="text" id="card-holder" name="cardHolder">
+                </div></div>
+                <div class="row">
+                  <div class="column card-number-container">
+                    <label for="card-number" class="required">
+                      Card Number
+                      <div class="card-types">
+                        <img class="card-type visa" src="/images/cards/visa.png" />
+                        <img class="card-type master-card" src="/images/cards/master-card.png" />
+                        <img class="card-type american-express" src="/images/cards/american-express.png" />
+                        <img class="card-type discover" src="/images/cards/discover.png" />
+                        <img class="card-type diners-club" src="/images/cards/diners-club.png" />
+                      </div>
+                      <span class="validation-failed"></span>
+                    </label>
+                    <input type="text" id="card-number" name="cardNumber">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="five column">
+                    <label for="card-expiration-month" class="required">Expiration Month <span class="validation-failed"></span></label>
+                    <input type="text" id="card-expiration-month" name="cardExpirationMonth">
+                  </div>
+                  <div class="four column">
+                    <label for="card-expiration-year" class="required">Expiration Year <span class="validation-failed"></span></label>
+                    <input type="text" id="card-expiration-year" name="cardExpirationYear">
+                  </div>
+                  <div class="three column">
+                    <label for="card-cvv" class="required">CVV <span class="validation-failed"></span></label>
+                    <input type="text" id="card-cvv" name="cardCVV">
+                  </div>
+                </div>
+                <br>
+                <div class="row"><div class="column">
+                  <label for="billing-address-1" class="required">Billing Address <span class="validation-failed"></span></label>
+                  <input type="text" id="billing-address-1" name="billingAddress1">
+                </div></div>
+                <div class="row"><div class="column">
+                  <label for="billing-address-2">Billing Address 2 <span class="validation-failed"></span></label>
+                  <input type="text" id="billing-address-2" name="billingAddress2">
+                </div></div>
+                <div class="row"><div class="column">
+                  <label for="billing-city" class="required">City <span class="validation-failed"></span></label>
+                  <input type="text" id="billing-city" name="billingCity">
+                </div></div>
+                <div class="row">
+                  <div class="column">
+                    <label for="billing-state" class="required">State <span class="validation-failed"></span></label>
+                    <input type="text" id="billing-state" name="billingState">
+                  </div>
+                  <div class="column">
+                    <label for="billing-zip" class="required">ZIP <span class="validation-failed"></span></label>
+                    <input type="text" id="billing-zip" name="billingZip">
+                  </div>
+                </div>
+                <br>
+                <div class="row autopay">
+                  <div class="eight column">
+                    <label>Autopay every month? <span class="validation-failed"></span></label>
+                  </div>
+                  <div class="two column">
+                    <input type="radio" id="autopay-true" name="autopay" checked value="true">
+                    <label for="autopay-true">Yes</label>
+                  </div>
+                  <div class="two column">
+                    <input type="radio" id="autopay-false" name="autopay" value="false">
+                    <label for="autopay-false">No</label>
+                  </div>
+                </div>
+                <div class="row"><div class="column">
+                  <input type="hidden" name="model" value="@(encodeURIComponent(JSON.stringify(model)))">
+                  <input type="submit" class="store-space-button" value="NEXT: Lease E-sign" id="submit-billing">
+                </div></div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="next-steps"></div>
+</div>

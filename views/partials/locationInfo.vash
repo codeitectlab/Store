@@ -1,0 +1,118 @@
+@{
+  address = [model.sSiteAddr1]
+  if(model.sSiteAddr2){
+    address.push(model.sSiteAddr2)
+  }
+  address.push(model.sSiteCity + ', ' + model.sSiteRegion + ' ' + model.sSitePostalCode)
+  mobileAddress = address.join('<br>')
+  address = address.join(', ')
+  encodedAddress = encodeURIComponent(address)
+}
+
+<div class="container location-info">
+  <div class="heading">
+    <div class="left column">
+      <div class="location">@model.sSiteCity, @model.sSiteRegion</div>
+      <div class="address">
+        <div class="street">@address</div>
+        <a class="get-directions" href="https://www.google.com/maps/dir/?api=1&destination=@encodedAddress" target="_blank">
+          <i class="fas fa-map-marker-alt"></i> Get Directions
+        </a>
+      </div>
+    </div>
+    <div class="right column">
+        <a class="phone" href="tel:+1 @model.sSitePhone">
+          @model.sSitePhone
+        </a>
+        <a class="email" href="mailto:@model.sEmailAddress">
+          @model.sEmailAddress
+        </a>
+    </div>
+  </div>
+  <div class="info">
+    <div class="left column">
+      <div class="row address">
+        <a class="get-directions" href="https://www.google.com/maps/dir/?api=1&destination=@encodedAddress" target="_blank">
+          <i class="fas fa-map-marker-alt"></i> Get Directions
+        </a>
+        <div class="street">
+          @html.raw(mobileAddress)
+        </div>
+      </div>
+      <div class="row square-container carousel" carousel-id="location-info-map-pics">
+        <div class="">
+          <iframe class="address-map" src="https://maps.google.com/maps?&amp;q=@html.raw(address)&amp;output=embed" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+        </div>
+        @if(model.imageUrls) {
+          @model.imageUrls.forEach(function(url){
+            <div><img src="@url"></div>
+          })
+        }
+@*
+        <div><img src="@(html.staticFilePath)/images/bonita-1.png"></div>
+        <div><img src="@(html.staticFilePath)/images/bonita-2.png"></div>
+        <div><img src="@(html.staticFilePath)/images/bonita-3.png"></div>
+*@
+      </div>
+      @if(model.times) {
+      <div class="row office hours">
+        <div class="label">OFFICE HOURS</div>
+        @if(model.times.office) {
+          @model.times.office.forEach(function(time){
+            <div>@html.raw(time)</div>
+          })
+        }
+      </div>
+      <div class="row access hours">
+        <div class="label">ACCESS HOURS</div>
+        @if(model.times.access) {
+          @model.times.access.forEach(function(time){
+            <div>@html.raw(time)</div>
+          })
+        }
+      </div>
+      }
+    </div>
+    <div class="right column">
+      <div class="heading">
+        <input type="radio" name="tab-selector" checked id="available-units-checkbox" />
+        <label class="label container" for="available-units-checkbox">Available Units</label>
+        <input type="radio" name="tab-selector" id="more-info-checkbox" />
+        <label class="label container" for="more-info-checkbox">More Info</label>
+
+        <div class="tabs">
+          @if(model.comingSoon) {
+            <div class="under-construction">
+              <div class="logo-container"><img class="logo" src="@(html.staticFilePath)/images/@html.raw('storespace_2c@2x.png')"></div>
+              <div class="coming-soon header">Coming Soon!</div>
+            </div>
+          }
+          @if(!model.comingSoon) {
+            @html.include('partials/availableUnits', model)
+          }
+          @if(model.times){
+          <div id="more-info">
+            <div class="row office hours">
+              <div class="label">OFFICE HOURS</div>
+              @if(model.times.office) {
+                @model.times.office.forEach(function(time){
+                  <div>@html.raw(time)</div>
+                })
+              }
+            </div>
+            <div class="row access hours">
+              <div class="label">ACCESS HOURS</div>
+              @if(model.times.access) {
+                @model.times.access.forEach(function(time){
+                  <div>@html.raw(time)</div>
+                })
+              }
+            </div>
+          </div>
+        }
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

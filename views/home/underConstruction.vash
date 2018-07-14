@@ -1,0 +1,9 @@
+@html.extend('layouts/main', function(model) {
+  @html.block('body', function(model) {
+    <div class="under-construction">
+      <div class="logo-container"><img class="logo" src="@(html.staticFilePath)/images/@html.raw('storespace_2c@2x.png')"></div>
+      <div class="coming-soon header">This page is under construction</div>
+      <div class="coming-soon sub-header">Please check back soon!</div>
+    </div>
+  })
+})

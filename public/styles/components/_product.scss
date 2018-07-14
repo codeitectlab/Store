@@ -1,0 +1,32 @@
+.m-product-grid {
+  .items {
+    margin: auto;
+    max-width: 1200px;
+    width: 100%;
+    @include breakpoint(mobile) {
+      margin: auto;
+    }
+    .m-product {
+      width: calc(100% / 5);
+      @include vendor-prefix(animation-duration, 0.25s);
+      @include vendor-prefix(animation-fill-mode, both);
+      @include vendor-prefix(animation-name, tileFadeIn);
+    
+      @include breakpoint(tablet) {
+        width: calc(100% / 4);
+
+        &:nth-child(n+5) {
+          display: block;
+        }
+      }
+      @include breakpoint(mobile) {
+        width: calc(100% / 2);
+      }
+    }
+
+    .hide {
+      opacity: 0;
+      @include vendor-prefix(animation-name, tileFadeOut);
+    }    
+  }
+}

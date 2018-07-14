@@ -1,0 +1,60 @@
+<div class="container reserve">
+  <div class="heading">Reserve A Unit</div>
+  <div class="details">
+    <div class="unit-details">
+      <div class="heading">Unit Information</div>
+      <div class="row">
+        @html.include('partials/reservations/unitInformationBrief', model)
+      </div>
+    </div>
+    <div class="tenant-details">
+      <div class="heading">Tenant Property Protection</div>
+      <div class="container">
+        <form method="POST" action="/reserve/online" id="reservation-form">
+          <input type="hidden" name="unitId" value="@model.unit.UnitID">
+          <input type="hidden" name="unitTypeId" value="@model.unit.UnitTypeID">
+          <input type="hidden" name="siteId" value="@model.unit.SiteID">
+          <input type="hidden" name="locationCode" value="@model.unit.sLocationCode">
+          <input type="hidden" id="unit-width" name="unitWidth" value="@model.unit.dcWidth">
+          <input type="hidden" id="unit-length" name="unitLength" value="@model.unit.dcLength">
+          <input type="hidden" name="model" value="@(encodeURIComponent(JSON.stringify(model)))">
+          @{
+            insurances = []
+            defaultPlan = {}
+
+            model.insurance.forEach(function(ins){
+              plan = {
+                i: ins.InsurCoverageID,
+                p: ins.dcPremium,
+                c: ins.dcCoverage,
+                displayP: ins.displayPremium + '/mo',
+                displayC: ins.displayCoverage
+              }
+
+              if(plan.p == 12) defaultPlan = plan
+              insurances.push(plan);
+            })
+
+            if(!defaultPlan) defaultPlan = insurances[Math.min(insurances.length-1, 1)]
+
+            insurances.sort(function(a,b) { return a.p*1.0 - b.p*1.0 })
+            minPremium = insurances[0].p
+            maxPremium = insurances[insurances.length-1].p
+          }
+          <div class="row insurance-range-container">
+            <label for="insurance-range">Select Protection Plan:</label>
+            <input type="range" id="insurance-range" min="0" value="@(Math.min(insurances.length-1, 1))" max="@(model.insurance.length-1)" step="1" data-insurances="@(JSON.stringify(insurances))"/>
+            <div class="insurance-range-min-max" data-min-premium="@html.formatCurrency(minPremium)/mo" data-max-premium="@html.formatCurrency(maxPremium)/mo"></div>
+            <div class="insurance-selected">
+              <input type="hidden" name="insuranceId" id="insuranceId" value="@defaultPlan.i">
+              <div class="premium">Premium: @defaultPlan.displayP</div>
+              <div class="coverage">Coverage: @defaultPlan.displayC</div>
+              <div class="approval @(defaultPlan.c > 5000 ? '' : 'invisible')">Subject to approval</div>
+            </div>
+          </div>
+          <input type="submit" class="store-space-button" value="NEXT: Billing" id="submit-insurance">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

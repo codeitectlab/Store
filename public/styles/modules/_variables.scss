@@ -1,0 +1,36 @@
+$store-space-red: #BE1E2D;
+$store-space-blue: #001F60;
+$store-space-light-blue: #00ADD6;
+$store-space-yellow: #FFBA00;
+$store-space-green: #358900;
+$store-space-gray: #A5ADBE;
+$store-space-teal: #0C4F71;
+$store-space-red-shadow: #6D0B15;
+
+$standard-transition: .25s ease-in-out;
+
+$body-font: normal normal normal 100% / 120% Cabin, sans-serif;
+
+$white: rgba(255, 255, 255, 1);
+$black: #404040;
+
+$body-background: $white;
+
+$link-default: $white;
+
+$z-indexes: (
+  header: 1000,
+//  footer: 900,
+  main: 800
+);
+
+$breakpoints: (
+  tablet: 1024px,
+  intermediate: 850px,
+  mobile: 800px
+);
+
+$nav-mobile-width: 260px;
+$nav-mobile-padding: 55px;
+$nav-mobile-close-height: 50px;
+$promo-mobile-height: 90px;

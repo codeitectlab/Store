@@ -1,0 +1,75 @@
+@html.extend('partials/account/base', function(m) {
+  @html.block('partial', function(m) {
+    <div class="card create-edit">
+      <div class="heading">@model.heading</div>
+      <div class="fields">
+        <form action="/account/doAccountInfo" method="POST">
+          <div class="row">
+            <div class="six column">
+              <label for="firstName" class="required">First Name</label>
+              <input type="text" id="firstName" name="firstName" />
+            </div>
+            <div class="six column">
+              <label for="lastName" class="required">Last Name</label>
+              <input type="text" id="lastName" name="lastName" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="six column">
+              <label for="phone" class="required">Phone</label>
+              <input type="text" id="phone" name="phone" />
+            </div>
+            <div class="six column">
+              <label for="address1">Address</label>
+              <input type="text" id="address1" name="address1" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="six column">
+              <label for="email" class="required">Email</label>
+              <input type="text" id="email" name="email" />
+            </div>
+            <div class="six column">
+              <label for="address2">Address 2</label>
+              <input type="text" id="address2" name="address2" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="six column">
+              <label for="password" class="required">Password</label>
+              <input type="password" id="password" name="password" />
+            </div>
+            <div class="six column">
+              <label for="city">City</label>
+              <input type="text" id="city" name="city" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="six column">
+              <label for="confirm-password" class="required">Confirm Password</label>
+              <input type="password" id="confirm-password" name="confirmPassword" />
+            </div>
+            <div class="three column">
+              <label for="state">State</label>
+              <select id="state" name="state">
+                @html.getStateCodes().forEach(function(code){
+                  <option value="@code">@code</option>
+                })
+              </select>
+            </div>
+            <div class="three column">
+              <label for="zip">ZIP</label>
+              <input type="number" id="zip" name="zip" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="six column">
+              <button class="store-space-button" type="submit">Create</button>
+              <a class="helper-label" href="/">Cancel</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  })
+})

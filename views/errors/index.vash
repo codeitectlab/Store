@@ -1,0 +1,7 @@
+  @html.extend('layouts/main', function(model) {
+    @html.block('body', function(model) {
+      <h1>500</h1>
+      <p style="white-space: pre-line">@model.message</p>
+      <p style="white-space: pre-line">@model.stack</p>  
+    })
+  })

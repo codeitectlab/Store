@@ -1,0 +1,30 @@
+        <table>
+          <tr class="unit-info info">
+            <td>Unit Info</td>
+          </tr>
+          <tr>
+            <td>Location:</td>
+            <td>@model.site.sSiteCity, @model.site.sSiteRegion</td>
+          </tr>
+          <tr>
+            <td>Size:</td>
+            <td>@model.unit.displaySize</td>
+          </tr>
+          <tr class="bottom-border">
+            <td>Type:</td>
+            <td>@model.unit.sTypeName</td>
+          </tr>
+          <tr class="rate-info info">
+            <td>Rate*</td>
+          </tr>
+          <tr>
+            <td>Monthly Lease:</td>
+            <td>@html.formatCurrency(model.unit.dcPushRate)</td>
+          </tr>
+          @if(model.unitType.concession){
+            <tr class="promotions">
+              <td>Promotions Available:</td>
+              <td class="promo-name">@model.unitType.concession.displayName</td>
+            </tr>
+          }
+        </table>

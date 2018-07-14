@@ -1,0 +1,157 @@
+.find-unit-overlay {
+  max-width: 600px;
+  text-align: center;
+
+  @include breakpoint(mobile) {
+    max-width: calc(100%);
+    margin: auto;
+  }
+
+  * {
+    color: white;
+    font-family: Raleway, sans-serif;
+  }
+
+  .mobile-label {
+    display: none;
+  }
+
+  &.mobile-only {
+    padding: 20px 20px 0 20px;
+
+    .mobile-label {
+      display: block;
+      color: $store-space-red;
+      text-align: left;
+      font-family: Raleway, sans-serif;
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  }
+
+  .heading {
+    font-size: 34px;
+    line-height: 120%;
+    margin-bottom: 20px;
+    font-family: 'Raleway', sans-serif;
+  }
+
+  .text {
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+
+  form {
+    @include display-flex();
+    @include flex-direction(row);
+    @include justify-content(center);
+
+    @include breakpoint(mobile) {
+//      padding: 20px;
+    }
+
+    input.text{
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      font-size: 20px;
+      height: 43px;
+      color: #717171;
+
+      @include inverse-breakpoint(mobile) {
+        width: 40%;
+        border: none;
+      }
+
+      @include breakpoint(mobile) {
+        @include flex-grow(1);
+      }
+    }
+    a.button{
+      background-color: $store-space-red;
+      border: none;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      font-family: 'Raleway', sans-serif;
+      font-size: 20px;
+      box-shadow: 0 3px $store-space-red-shadow;
+
+      @include inverse-breakpoint(mobile) {
+        width: 45%;
+      }
+
+      i {
+        @include inverse-breakpoint(mobile) {
+          margin-right: 10px;
+        }
+      }
+
+      span {
+        @include breakpoint(mobile) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.storage-calculator-overlay {
+  max-width: 600px;
+  text-align: center;
+  margin: 0 auto;
+
+  @include breakpoint(mobile) {
+    max-width: 350px;
+  }
+
+  * {
+    color: white;
+    font-family: Raleway, sans-serif;
+    line-height: 100%;
+  }
+
+  img {
+    max-width: 200px;
+    margin: 20px auto;
+
+    @include breakpoint(mobile) {
+      display: none;
+    }
+  }
+
+  .heading {
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+    @include breakpoint(mobile) {
+      font-size: 28px;
+    }
+  }
+
+  .text {
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  a {
+    display: inline-block;
+    background-color: $store-space-red;
+    color: white;
+    border: none;
+    text-transform: uppercase;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 2px;
+    @include box-shadow(0 3px 0 $store-space-red-shadow);
+
+    i {
+      margin-right: 10px;
+    }
+  }
+}

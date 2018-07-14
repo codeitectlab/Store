@@ -1,0 +1,201 @@
+<div class="container map">
+
+</div>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+<script>
+var stateIdToName = {
+  "1":{"id":1,"code":"AL","name":"Alabama"},
+  "2":{"id":2,"code":"AK","name":"Alaska"},
+  "4":{"id":4,"code":"AZ","name":"Arizona"},
+  "5":{"id":5,"code":"AR","name":"Arkansas"},
+  "6":{"id":6,"code":"CA","name":"California"},
+  "8":{"id":8,"code":"CO","name":"Colorado"},
+  "9":{"id":9,"code":"CT","name":"Connecticut"},
+  "10":{"id":10,"code":"DE","name":"Delaware"},
+  "11":{"id":11,"code":"DC","name":"District of Columbia"},
+  "12":{"id":12,"code":"FL","name":"Florida"},
+  "13":{"id":13,"code":"GA","name":"Georgia"},
+  "15":{"id":15,"code":"HI","name":"Hawaii"},
+  "16":{"id":16,"code":"ID","name":"Idaho"},
+  "17":{"id":17,"code":"IL","name":"Illinois"},
+  "18":{"id":18,"code":"IN","name":"Indiana"},
+  "19":{"id":19,"code":"IA","name":"Iowa"},
+  "20":{"id":20,"code":"KS","name":"Kansas"},
+  "21":{"id":21,"code":"KY","name":"Kentucky"},
+  "22":{"id":22,"code":"LA","name":"Louisiana"},
+  "23":{"id":23,"code":"ME","name":"Maine"},
+  "24":{"id":24,"code":"MD","name":"Maryland"},
+  "25":{"id":25,"code":"MA","name":"Massachusetts"},
+  "26":{"id":26,"code":"MI","name":"Michigan"},
+  "27":{"id":27,"code":"MN","name":"Minnesota"},
+  "28":{"id":28,"code":"MS","name":"Mississippi"},
+  "29":{"id":29,"code":"MO","name":"Missouri"},
+  "30":{"id":30,"code":"MT","name":"Montana"},
+  "31":{"id":31,"code":"NE","name":"Nebraska"},
+  "32":{"id":32,"code":"NV","name":"Nevada"},
+  "33":{"id":33,"code":"NH","name":"New Hampshire"},
+  "34":{"id":34,"code":"NJ","name":"New Jersey"},
+  "35":{"id":35,"code":"NM","name":"New Mexico"},
+  "36":{"id":36,"code":"NY","name":"New York"},
+  "37":{"id":37,"code":"NC","name":"North Carolina"},
+  "38":{"id":38,"code":"ND","name":"North Dakota"},
+  "39":{"id":39,"code":"OH","name":"Ohio"},
+  "40":{"id":40,"code":"OK","name":"Oklahoma"},
+  "41":{"id":41,"code":"OR","name":"Oregon"},
+  "42":{"id":42,"code":"PA","name":"Pennsylvania"},
+  "44":{"id":44,"code":"RI","name":"Rhode Island"},
+  "45":{"id":45,"code":"SC","name":"South Carolina"},
+  "46":{"id":46,"code":"SD","name":"South Dakota"},
+  "47":{"id":47,"code":"TN","name":"Tennessee"},
+  "48":{"id":48,"code":"TX","name":"Texas"},
+  "49":{"id":49,"code":"UT","name":"Utah"},
+  "50":{"id":50,"code":"VT","name":"Vermont"},
+  "51":{"id":51,"code":"VA","name":"Virginia"},
+  "53":{"id":53,"code":"WA","name":"Washington"},
+  "54":{"id":54,"code":"WV","name":"West Virginia"},
+  "55":{"id":55,"code":"WI","name":"Wisconsin"},
+  "56":{"id":56,"code":"WY","name":"Wyoming"},
+  "60":{"id":60,"code":"AS","name":"America Samoa"},
+  "64":{"id":64,"code":"FM","name":"Federated States of Micronesia"},
+  "66":{"id":66,"code":"GU","name":"Guam"},
+  "68":{"id":68,"code":"MH","name":"Marshall Islands"},
+  "69":{"id":69,"code":"MP","name":"Northern Mariana Islands"},
+  "70":{"id":70,"code":"PW","name":"Palau"},
+  "72":{"id":72,"code":"PR","name":"Puerto Rico"},
+  "74":{"id":74,"code":"UM","name":"U.S. Minor Outlying Islands"},
+  "78":{"id":78,"code":"VI","name":"Virgin Islands of the United States"}
+  };
+
+var map = document.querySelector(".location-selector div.map");
+var width = map.offsetWidth - 40;
+
+var ratio = 500/960;
+var height = ratio * width;
+
+
+
+var width = width,
+    height = height,
+    active = d3.select(null);
+
+var projection = d3.geo.albersUsa()
+    .scale(height * 2)
+    .translate([width / 2, height / 2]);
+
+var zoom = d3.behavior.zoom()
+    .translate([0, 0])
+    .scale(1)
+    .scaleExtent([1, 8])
+    .on("zoom", zoomed);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var svg = d3.select("div.map").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .on("click", stopped, true);
+
+svg.append("rect")
+    .attr("class", "background")
+    .attr("width", width)
+    .attr("height", height)
+    .on("click", reset);
+
+var g = svg.append("g");
+
+svg
+    .call(zoom) // delete this line to disable free zooming
+    .call(zoom.event);
+
+d3.json("@(html.staticFilePath)/data/us.json", function(error, us) {
+  if (error) throw error;
+
+  g.selectAll("path")
+      .data(topojson.feature(us, us.objects.states).features)
+    .enter().append("path")
+      .attr("d", path)
+      .attr("class", function(d) { return ["feature", d.id, "state-"+stateIdToName[d.id].code].join(" ") ; })
+      .attr("state", function(d) { return stateIdToName[d.id].name; })
+      .attr("state-code", function(d) { return stateIdToName[d.id].code; })
+      .on("click", clicked);
+
+  g.append("path")
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+      .attr("class", "mesh")
+      .attr("d", path);
+
+g.selectAll(".state-label")
+    .data(topojson.feature(us, us.objects.states).features)
+  .enter().append("text")
+    .attr("class", function(d) { return ["state-label", d.id, "state-"+stateIdToName[d.id].code].join(" ") ; })
+    .attr("state", function(d) { return stateIdToName[d.id].name; })
+    .attr("state-code", function(d) { return stateIdToName[d.id].code; })
+    .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+    .attr("dy", ".35em")
+    .text(function(d) { return stateIdToName[d.id].code; })
+    .on("click", clickedLabel)
+    ;
+});
+
+function clickedLabel() {
+  if(!d3) return;
+  var state = this.getAttribute("state");
+  var path = g.select("path[state='" + state + "']");
+  if(path) path.each(clicked);
+}
+
+function clicked(d) {
+  if (active.node() === this) return reset();
+  active.classed("active", false);
+  active = d3.select(this).classed("active", true);
+  var state = this.getAttribute("state");
+  var locations = document.querySelector(".location-selector .locations");
+  var states = locations.querySelectorAll(".state")
+  for(var i=0; i<states.length; i++) {
+    states[i].classList.remove("active");
+  }
+  var stateInList = locations.querySelector(".state[state='" + state + "']");
+  if(stateInList) stateInList.classList.add("active");
+
+  var bounds = path.bounds(d),
+      dx = bounds[1][0] - bounds[0][0],
+      dy = bounds[1][1] - bounds[0][1],
+      x = (bounds[0][0] + bounds[1][0]) / 2,
+      y = (bounds[0][1] + bounds[1][1]) / 2,
+      scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
+      translate = [width / 2 - scale * x, height / 2 - scale * y];
+
+  svg.transition()
+      .duration(750)
+      .call(zoom.translate(translate).scale(scale).event);
+}
+
+function reset() {
+  active.classed("active", false);
+  active = d3.select(null);
+  var locations = document.querySelector(".location-selector .locations");
+  var states = locations.querySelectorAll(".location-selector .locations .state")
+  for(var i=0; i<states.length; i++) {
+    states[i].classList.remove("active");
+  }
+
+  svg.transition()
+      .duration(750)
+      .call(zoom.translate([0, 0]).scale(1).event);
+}
+
+function zoomed() {
+  g.style("stroke-width", 1.5 / d3.event.scale + "px");
+  g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+}
+
+// If the drag behavior prevents the default click,
+// also stop propagation so we don’t click-to-zoom.
+function stopped() {
+  if (d3.event.defaultPrevented) d3.event.stopPropagation();
+}
+
+
+</script>

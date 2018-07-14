@@ -1,0 +1,39 @@
+.red-info-tile{
+  background-color: $store-space-red;
+  width: 300px;
+  height: 350px;
+  color: white;
+  padding: 20px;
+  margin: 0 5px;
+  text-align: center;
+  border-radius: 8px;
+  @include box-shadow(2px 2px 2px 1px rgba(0,0,0,0.2));
+
+  * {
+    font-family: Raleway, sans-serif;
+    line-height: 100%;
+  }
+
+  img {
+    max-height: 60px;
+    min-height: 35px;
+    margin: 40px auto 20px auto;
+  }
+
+  .heading {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .sub-heading {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .text {
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    padding-top: 20px;
+    font-size: 14px;
+  }
+}

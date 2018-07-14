@@ -1,0 +1,6 @@
+<div class="red-info-tile">
+  <img src="@(html.staticFilePath)/images/@model.imgSrc">
+  <div class="heading">@model.heading</div>
+  <div class="sub-heading">@model.subHeading</div>
+  <div class="text">@model.text</div>
+</div>

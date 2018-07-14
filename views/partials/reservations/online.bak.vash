@@ -1,0 +1,235 @@
+<div class="container reserve">
+  <div class="heading">Reserve A Unit</div>
+  <div class="details">
+    <div class="unit-details">
+      <div class="heading">Unit Information</div>
+      <div class="row">
+        <table>
+          <tr class="unit-info info">
+            <td>Unit Info</td>
+          </tr>
+          <tr>
+            <td>Location:</td>
+            <td>@model.site.sSiteCity, @model.site.sSiteRegion</td>
+          </tr>
+          <tr>
+            <td>Size:</td>
+            <td>@model.unit.displaySize</td>
+          </tr>
+          <tr class="bottom-border">
+            <td>Type:</td>
+            <td>@model.unit.sTypeName</td>
+          </tr>
+          <tr class="rate-info info">
+            <td>Fees</td>
+          </tr>
+          @model.moveInCosts.forEach(function(cost) {
+            <tr>
+              <td>@cost.ChargeDescription</td>
+              <td>@html.formatCurrency(@cost.ChargeAmount)</td>
+            </tr>
+          })
+          <tr class="bottom-border">
+            <td>Taxes:</td>
+            <td>@html.formatCurrency(model.moveInTaxes)</td>
+          </tr>
+          <tr class="monthly-total bottom-border">
+            <td>Move-In Total:</td>
+            <td>@html.formatCurrency(model.moveInTotal)</td>
+          </tr>
+          <tr class="promotions">
+            <td>Promotions:</td>
+            <td></td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+    <div class="tenant-details">
+      <div class="heading">Your Information</div>
+      <div class="reservation-type-selector container">
+        <input type="radio" name="reservation-type" value="online" id="online" />
+        <label for="online">
+          <div class="title">Complete Reservation Online</div>
+          <div class="description">
+            Complete your reservation by signing the eLease and
+            setting up your card payment information online.
+            <strong>No extra fee applies.</strong>
+          </div>
+        </label>
+        <div class="reservation" id="reserve-online">
+          <form method="POST" action="/confirm" id="reservation-form">
+            <div class="screen screen-1 active">
+              <a class="name">Your Information</a>
+              <div class="fields">
+                <input type="hidden" name="unitId" value="@model.unit.UnitID">
+                <input type="hidden" name="unitTypeId" value="@model.unit.UnitTypeID">
+                <input type="hidden" name="siteId" value="@model.unit.SiteID">
+                <input type="hidden" name="locationCode" value="@model.unit.sLocationCode">
+                <div class="row"><div class="column">
+                  <label for="first-name" class="required">First Name <span class="validation-failed"></span></label>
+                  <input type="text" id="first-name" name="firstName">
+                </div></div>
+                <div class="row"><div class="column">
+                  <label for="last-name" class="required">Last Name <span class="validation-failed"></span></label>
+                  <input type="text" id="last-name" name="lastName">
+                </div></div>
+                <div class="row"><div class="column">
+                  <label for="email" class="required">Email <span class="validation-failed"></span></label>
+                  <input type="email" id="email" name="email">
+                </div></div>
+                <div class="row">
+                  <div class="column">
+                    <label for="phone" class="required">Phone Number <span class="validation-failed"></span></label>
+                    <input type="text" id="phone" name="phone">
+                  </div>
+                  <div class="column">
+                    <label for="move-in-date" class="required">Move-In Date <span class="validation-failed"></span></label>
+                    <input type="text" id="move-in-date" data-date-picker="true" name="moveInDate">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="screen screen-2">
+              <a class="name">Billing Information</a>
+              <div class="fields">
+                <div class="row"><div class="column">
+                  <label for="card-number" class="required">Card Number <span class="validation-failed"></span></label>
+                  <input type="text" id="card-number" name="cardNumber">
+                </div></div>
+                <div class="row"><div class="column">
+                  <label for="card-holder" class="required">Card Holder Name <span class="validation-failed"></span></label>
+                  <input type="text" id="card-holder" name="cardHolder">
+                </div></div>
+                <div class="row">
+                  <div class="column">
+                    <label for="card-expiration-month" class="required">Expiration Month <span class="validation-failed"></span></label>
+                    <input type="text" id="card-expiration-month" name="cardExpirationMonth">
+                  </div>
+                  <div class="column">
+                    <label for="card-expiration-year" class="required">Expiration Year <span class="validation-failed"></span></label>
+                    <input type="text" id="card-expiration-year" name="cardExpirationYear">
+                  </div>
+                </div>
+                <br>
+                <div class="row"><div class="column">
+                  <label for="billing-address-1" class="required">Billing Address <span class="validation-failed"></span></label>
+                  <input type="text" id="billing-address-1" name="billingAddress1">
+                </div></div>
+                <div class="row"><div class="column">
+                  <label for="billing-address-2">Billing Address 2 <span class="validation-failed"></span></label>
+                  <input type="text" id="billing-address-2" name="billingAddress2">
+                </div></div>
+                <div class="row"><div class="column">
+                  <label for="billing-city" class="required">City <span class="validation-failed"></span></label>
+                  <input type="text" id="billing-city" name="billingCity">
+                </div></div>
+                <div class="row">
+                  <div class="column">
+                    <label for="billing-state" class="required">State <span class="validation-failed"></span></label>
+                    <input type="text" id="billing-state" name="billingState">
+                  </div>
+                  <div class="column">
+                    <label for="billing-zip" class="required">ZIP <span class="validation-failed"></span></label>
+                    <input type="text" id="billing-zip" name="billingZip">
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="seven column">
+                    <label>Autopay every month? <span class="validation-failed"></span></label>
+                  </div>
+                  <div class="three column">
+                    <input type="radio" id="autopay-true" name="autopay" checked value="true">
+                    <label for="autopay-true"><div class="title">Yes</div></label>
+                  </div>
+                  <div class="two column">
+                    <input type="radio" id="autopay-false" name="autopay" value="false">
+                    <label for="autopay-false"><div class="title">No</div></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="screen screen-3">
+              <a class="name">eSign Documents</a>
+              <div class="fields">
+                <div class="row">
+                  <div class="ten column">
+                    <a class="button store-space-button">Lease 1</a>
+                  </div>
+                  <div class="two column">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="ten column">
+                    <a class="button store-space-button">Lease 2</a>
+                  </div>
+                  <div class="two column">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="ten column">
+                    <a class="button store-space-button">Lease 3</a>
+                  </div>
+                  <div class="two column">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="ten column">
+                    <a class="button store-space-button">Lease 4</a>
+                  </div>
+                  <div class="two column">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="screen screen-4">
+              <a class="name">Summary</a>
+              <div class="fields">
+                <input type="submit" value="SUBMIT" id="submit-reservation">
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="separator"></div>
+
+        <input type="radio" name="reservation-type" value="at-location" id="at-location" />
+        <label for="at-location">
+          <div class="title">Complete Reservation At Location</div>
+          <div class="description">
+            Bring your confirmation into the location office
+            and complete your lease in person.
+            <strong>Reservation fee applies.</strong>
+          </div>
+        </label>
+        <div class="reservation" id="reserve-at-location">
+          <form method="POST" action="/confirm" id="reservation-form2">
+            <input type="hidden" name="unitId" value="@model.unit.UnitID">
+            <input type="hidden" name="unitTypeId" value="@model.unit.UnitTypeID">
+            <input type="hidden" name="siteId" value="@model.unit.SiteID">
+            <input type="hidden" name="locationCode" value="@model.unit.sLocationCode">
+            <label for="first-name" class="required">First Name <span class="validation-failed"></span></label>
+            <input type="text" id="first-name" name="firstName">
+            <label for="last-name" class="required">Last Name <span class="validation-failed"></span></label>
+            <input type="text" id="last-name" name="lastName">
+            <label for="email" class="required">Email <span class="validation-failed"></span></label>
+            <input type="email" id="email" name="email">
+            <div class="phone-move-in">
+              <div>
+                <label for="phone" class="required">Phone Number <span class="validation-failed"></span></label>
+                <input type="text" id="phone" name="phone">
+              </div>
+              <div>
+                <label for="move-in-date" class="required">Move-In Date <span class="validation-failed"></span></label>
+                <input type="text" id="move-in-date" data-date-picker="true" name="moveInDate">
+              </div>
+            </div>
+            <input type="submit" value="SUBMIT" id="submit-reservation">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="next-steps"></div>
+</div>

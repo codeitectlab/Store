@@ -1,0 +1,106 @@
+<div class="container reserve confirm">
+  <div class="heading">Reservation Confirmation</div>
+  <div class="details">
+    <div class="unit-details">
+      <div class="heading">Unit Information</div>
+      <div class="row">
+        <div class="location">
+          <div>Location:</div>
+          <div>@model.site.sSiteAddr1</div>
+          @if(model.site.sSiteAddr2){
+            <div>@model.site.sSiteAddr2</div>
+          }
+          <div>@model.site.sSiteCity, @model.site.sSiteRegion @model.site.sSitePostalCode</div>
+        </div>
+        <div class="contact">
+          <div>Contact:</div>
+          <div><a href="tel:@model.site.sSitePhone">@model.site.sSitePhone</a></div>
+          <div><a href="mailto:@model.site.sEmailAddress">@model.site.sEmailAddress</a></div>
+        </div>
+      </div>
+      <div class="spacer"></div>
+      <div class="row">
+        @{
+          weekday = 'Closed'
+          sat = 'Closed'
+          sun = 'Closed'
+
+          if(!model.site.bClosedWeekdays){
+            array = model.site.tWeekdayStrt.split(':')
+            weekday = (1*array[0]) + ':' + array[1]
+            array = model.site.tWeekdayEnd.split(':')
+            weekday = weekday + ' - ' + (1*array[0]) + ':' + array[1]
+          }
+
+          if(!model.site.bClosedSaturday){
+            array = model.site.tSaturdayStrt.split(':')
+            sat = (1*array[0]) + ':' + array[1]
+            array = model.site.tSaturdayEnd.split(':')
+            sat = sat + ' - ' + (1*array[0]) + ':' + array[1]
+          }
+
+          if(!model.site.bClosedSunday){
+            array = model.site.tSundayStrt.split(':')
+            sun = (1*array[0]) + ':' + array[1]
+            array = model.site.tSundayEnd.split(':')
+            sun = sun + ' - ' + (1*array[0]) + ':' + array[1]
+          }
+        }
+        <div class="office-hours">
+          <div>Office Hours:</div>
+          <div>M-F: @weekday</div>
+          <div>Sat: @sat</div>
+          <div>Sun: @sun</div>
+        </div>
+        <div class="access-hours">
+          <div>Access Hours:</div>
+          <div>M-F: 6:00 - 10:00</div>
+          <div>Sat: 6:00 - 10:00</div>
+          <div>Sun: 6:00 - 10:00</div>
+        </div>
+      </div>
+      <div class="spacer"></div>
+      <div class="row">
+        <div class="unit-features @html.raw(model.unit.features && model.unit.features.length > 0 ? '' : ' invisible ')">
+          <div>Unit Features:</div>
+            @model.unit.features.forEach(function(feature){
+              <div>@feature</div>
+            })
+        </div>
+        <div class="unit-info">
+          <div>Unit Info:</div>
+          <div class="size">@model.unit.displaySize</div>
+          <div class="price">@model.unit.displayPushRate/mo</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="tenant-details">
+      <div class="heading">Your Information</div>
+      <div class="container">
+        <div class="thanks">THANK YOU!</div>
+        <div class="confirmation">Confirmation #: @model.waitingListId</div>
+        <div class="text">
+          Your reservation details have been sent! The property manager will be contacting you within 2 business days to finalize the reservation. But rest assured, your unit has been reserved.
+        </div>
+        <div class="spacer"></div>
+        <div class="tenant-info">
+          <div>Your Information:</div>
+          <div>@model.tenant.sFName @model.tenant.sLName</div>
+          <div>@model.tenant.sEmail</div>
+          <div>@model.tenant.sPhone</div>
+        </div>
+        <div class="move-in-date">
+          <div>Move-in Date:</div>
+          <div>@html.getHumanReadableDate(model.moveInDate)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="next-steps">
+    <div>What’s Next After You Have Made Your Reservation?</div>
+    <div>1. Your property manager will call you to confirm your reservation and answer any other questions you may have.</div>
+    <div>2. Prepare your belongings and use our packing tips to best utilize the space.</div>
+    <div>3. Sign your lease and start moving your storage items into the unit.</div>
+  </div>
+</div>

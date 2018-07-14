@@ -1,0 +1,5 @@
+<div class="account account-container">
+  <div class="card-container">
+    @html.block('partial')
+  </div>
+</div>

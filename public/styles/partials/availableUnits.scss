@@ -1,0 +1,396 @@
+.available-units {
+  width: 100%;
+  margin: 0 auto 20px auto;
+
+  .heading {
+    @include display-flex();
+    @include flex-direction(column);
+    @include align-items(flex-start);
+    @include justify-content(center);
+
+    background-color: $store-space-blue;
+    height: 90px;
+    border-radius: 5px 5px 0px 0px;
+
+    @include breakpoint(mobile) {
+      @include align-items(center);
+      height: 50px;
+    }
+
+    .label {
+      font-size: 28px;
+      font-family: Raleway, sans-serif;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 10px;
+
+      @include breakpoint(mobile) {
+        font-size: 22px;
+        margin-bottom: 0;
+      }
+
+    }
+    .text {
+      color: white;
+
+      @include breakpoint(mobile) {
+        display: none;
+      }
+
+      .yellow {
+        color: $store-space-yellow;
+      }
+    }
+  }
+
+  .sub-heading {
+    @include display-flex();
+    @include flex-direction(row);
+    @include align-items(center);
+    @include justify-content(space-between);
+
+    background-color: $store-space-teal;
+    height: 40px;
+
+    @include breakpoint(mobile) {
+//      display: none;
+    }
+
+    .left{
+      color: $white;
+    }
+
+    .right{
+      color: $white;
+      @include flex-grow(1);
+      text-align: right;
+
+      a {
+        height: 40px;
+        padding: 0 10px;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        &:after{
+          position: absolute;
+          text-align: left;
+          content: '\2009';
+          width: 10px;
+        }
+      }
+    }
+  }
+
+  &[data-sort-by="price"] {
+    &[data-sort-order="-1"] {
+      .sort-by-price:after {
+        content: '\2193';
+      }
+    }
+    &[data-sort-order="1"] {
+      .sort-by-price:after {
+        content: '\2191';
+      }
+    }
+  }
+  &[data-sort-by="area"] {
+    &[data-sort-order="-1"] {
+      .sort-by-size:after {
+        content: '\2193';
+      }
+    }
+    &[data-sort-order="1"] {
+      .sort-by-size:after {
+        content: '\2191';
+      }
+    }
+  }
+
+  .units {
+    @include display-flex();
+    @include flex-direction(column);
+
+    .unit {
+      @include display-flex();
+      @include flex-direction(row);
+      @include align-items(center);
+      @include justify-content(space-between);
+
+      padding: 20px;
+      border-left: 1px solid $store-space-gray;
+      border-right: 1px solid $store-space-gray;
+      border-bottom: 1px solid $store-space-gray;
+      max-height: 190px;
+
+      &:nth-of-type(2n) {
+        background-color: #f2f2f2;
+      }
+
+      @include breakpoint(mobile) {
+        border-left: none;
+        border-right: none;
+        border-bottom: 2px solid $store-space-gray;
+
+        padding: 10px;
+
+        &:nth-of-type(2n) {
+          background-color: transparent;
+        }
+      }
+
+      .column {
+        @include display-flex();
+        @include justify-content(flex-start);
+//        height: 100%;
+        margin-right: 20px;
+
+        @include inverse-breakpoint(mobile) {
+          height: 100%;
+        }
+
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+
+      .image-container {
+        @include align-items(center);
+        @include justify-content(center);
+        margin-left: 0;
+        padding-top: 0;
+//        max-width: calc((100% - 100px -2px) / 4);
+        max-width: calc(25% - 10px);
+
+        @include breakpoint(mobile) {
+          display: none;
+        }
+
+        img {
+          max-width: 150px;
+        }
+      }
+
+      .unit-properties {
+        @include display-flex();
+        @include flex-direction(row);
+        @include align-items(center);
+        width: 100%;
+        max-width: calc(75% + 10px);
+        height: 110px;
+
+        @include breakpoint(mobile) {
+          @include flex-direction(column);
+          @include justify-content(space-between);
+          max-width: 100%;
+          padding: 0;
+        }
+
+        .column.left {
+          @include display-flex();
+          @include flex-direction(column);
+          @include align-items(center);
+          @include justify-content(space-between);
+
+          width: 66.6%;
+
+          @include breakpoint(mobile) {
+            width: 100%;
+            margin: 0;
+            height: 100px;
+          }
+        }
+
+        .column.right {
+          width: 33.3%;
+
+          @include breakpoint(mobile) {
+            @include flex-direction(row);
+            width: 100%;
+            margin: 0;
+          }
+        }
+
+        .sub {
+          @include display-flex();
+          @include flex-direction(row);
+          @include align-items(flex-start);
+          width: 100%;
+
+          &.top {
+            @include inverse-breakpoint(mobile) {
+              padding-top: 10px;
+            }
+          }
+
+          &.bottom {
+            @include align-items(flex-start);
+          }
+
+          > div {
+            width: calc(50% - 10px);
+            margin-right: 20px;
+            text-align: center;
+
+            &:last-of-type {
+              margin-right: 0;
+            }
+          }
+
+        }
+
+        .size {
+          font-family: Montserrat, sans-serif;
+          font-size: 26px;
+          line-height: 100%;
+          font-weight: bold;
+          text-align: center;
+          color: $store-space-red;
+          margin-bottom: 10px;
+
+          @include breakpoint(tablet) {
+            font-size: 24px;
+            margin-bottom: 5px;
+          }
+
+        }
+        .type {
+          font-family: Raleway, sans-serif;
+          font-size: 14px;
+          line-height: 100%;
+          font-weight: bold;
+          text-align: center;
+          color: $store-space-red;
+
+          @include breakpoint(tablet) {
+            font-size: 13px;
+          }
+        }
+        .features {
+          font-size: 16px;
+          text-align: center;
+          color: $black;
+
+          @include breakpoint(tablet) {
+            font-size: 13px;
+          }
+        }
+      }
+
+      .unit-promos {
+        @include display-flex();
+        @include flex-direction(column);
+        @include align-items(center);
+        @include justify-content(space-between);
+        color: $black;
+
+        @include breakpoint(mobile) {
+          width: 100%;
+        }
+
+        .label {
+          font-size: 16px;
+          font-weight: bold;
+          line-height: 100%;
+          text-align: center;
+
+          @include breakpoint(mobile) {
+            width: 50%;
+            order: 1;
+          }
+        }
+        .green {
+          color: $store-space-green;
+        }
+        .red {
+          color: $store-space-red;
+        }
+        .reserve {
+          text-align: center;
+          margin: 0 auto 10px;
+          width: 100%;
+
+          @include breakpoint(mobile) {
+            width: 50%;
+            order: 2;
+            margin: 0 auto;
+          }
+
+          a.button,
+          input[type="submit"] {
+            background-color: $white;
+            color: $store-space-red;
+            font-family: Raleway, sans-serif;
+            font-size: 20px;
+            line-height: calc(40px - 2px);
+            font-weight: 700;
+            border: 2px solid $store-space-red;
+            border-radius: 5px;
+
+            @include breakpoint(tablet) {
+              font-size: 18px;
+              padding: 0 15px;
+            }
+          }
+        }
+      }
+
+      .price{
+        font-family: Montserrat, sans-serif;
+        font-size: 26px;
+        line-height: 100%;
+        font-weight: bold;
+        text-align: center;
+        color: $store-space-red;
+        margin-bottom: 8px;
+
+        .per-month {
+          font-size: 20px;
+
+          @include breakpoint(tablet) {
+            font-size: 16px;
+          }
+        }
+
+        @include breakpoint(tablet) {
+          font-size: 22px;
+        }
+      }
+      .sub-price {
+        font-size: 14px;
+        line-height: 100%;
+        text-align: center;
+
+        @include breakpoint(tablet) {
+          font-size: 13px;
+        }
+      }
+
+      .label,
+      .in-store-price {
+        font-size: 16px;
+        text-align: center;
+
+        @include breakpoint(tablet) {
+          font-size: 13px;
+        }
+      }
+      .in-store-price {
+        font-weight: bold;
+        position: relative;
+        display: inline;
+        padding: 0 10px;
+
+        &:after {
+          content: ' ';
+          border-top: 2px solid $store-space-red;
+          position: absolute;
+          top: 50%;
+          left: 0;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

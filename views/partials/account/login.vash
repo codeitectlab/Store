@@ -1,0 +1,31 @@
+@html.extend('partials/account/base', function(m) {
+  @html.block('partial', function(m) {
+    <div class="card login">
+      <div class="heading">My Account Login</div>
+      @if(model.msg){
+        <div class="message">@model.msg</div>
+      }
+      <div class="fields">
+        <form action="/account/doLogin" method="POST">
+          <div class="row"><div class="column">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" />
+          </div></div>
+          <div class="row"><div class="column">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" />
+          </div></div>
+          <div class="row"><div class="column">
+            <input type="hidden" id="r" name="r" value="@model.r" />
+            <button class="store-space-button" type="submit">Login</button>
+            <a class="helper-label" href="/account/forgot">Forgot Password?</a>
+          </div></div>
+          <div class="row"><div class="column">
+            <a class="helper-label">Don't have an account?</a>
+            <a class="button store-space-button-secondary" href="/account/create">Create Account</a>
+          </div></div>
+        </form>
+      </div>
+    </div>
+  })
+})

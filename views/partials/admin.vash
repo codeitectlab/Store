@@ -1,0 +1,244 @@
+<link rel="stylesheet" href="@(html.staticFilePath)/bundle/styles/@html.assetVersions['skeleton.min.css']" />
+<script>
+//  var cdn = '@(html.staticFilePath)/locations/';
+  var cdn = '//d2qkkzpelj00zf.cloudfront.net/locations/';
+
+</script>
+<div class="container nimda">
+  <div class="header">
+    <a>ADMIN</a>
+    <a>@model.user.displayName</a>
+    <a href="/nimda/logout">Logout</a>
+  </div>
+  <div class="locations" id="locations">
+    @{
+      model.locations.push({
+          sLocationCode: 'New',
+          status: 'New',
+          isNew: true
+      })
+    }
+    @if(model.locations) {
+      @model.locations.forEach(function(location){
+        @if(location.isNew) {
+          <br><br>
+        }
+        @{
+          if(!location.isNew){
+            location.status = 'Active'
+            if(new Date(location.availableFrom) > new Date()) location.status = 'Scheduled'
+            if(location.closedFrom && new Date(location.closedFrom) < new Date()) location.status = 'Closed'
+          }
+        }
+        <div class="location @(location.isNew ? 'new hidden' : '')">
+          <label class="heading" for="location-radio-@location.sLocationCode">
+            <span>@location.sLocationCode: @location.sSiteCity, @location.sSiteRegion</span>
+            <span>@location.status</span>
+          </label>
+          <input type="radio" class="location-radios" id="location-radio-@location.sLocationCode" name="location-radios" />
+          <div class="details"><form action="/nimda/saveLocationInfo" method="POST">
+            <div class="row">
+              <div class="six columns">
+                <label for="corporateCode">Corporate Code: </label>
+                <input class="u-full-width" type="text" id="corporateCode" name="corporateCode" value="@location.corporateCode" @(location.isNew ? '' : 'readonly') />
+              </div>
+              <div class="six columns">
+                <label for="locationCode">Location Code: </label>
+                <input class="u-full-width" type="text" id="locationCode" name="sLocationCode" value="@location.sLocationCode" @(location.isNew ? '' : 'readonly') />
+              </div>
+              <input type="hidden" id="corporateCodeLocationCode" name="corporateCodeLocationCode" value="@location.corporateCodeLocationCode" />
+            </div>
+            <div class="row">
+              <div class="five columns">
+                <label for="streetAddress">Door & Street: </label>
+                <input class="u-full-width" type="text" id="streetAddress" name="sSiteAddr1" value="@location.sSiteAddr1" />
+              </div>
+              <div class="four columns">
+                <label for="city">City: </label>
+                <input class="u-full-width" type="text" id="city" name="sSiteCity" value="@location.sSiteCity" />
+              </div>
+              <div class="one columns">
+                <label for="state">State: </label>
+                <input class="u-full-width" type="text" id="state" name="sSiteRegion" value="@location.sSiteRegion" />
+              </div>
+              <div class="two columns">
+                <label for="zip">ZIP: </label>
+                <input class="u-full-width" type="text" id="zip" name="sSitePostalCode" value="@location.sSitePostalCode" />
+              </div>
+            </div>
+            <div class="row location-images">
+              <label>Location Images</label>
+              @if(location.imageUrls) {
+                @location.imageUrls.forEach(function(url){
+                  <div class="row location-image">
+                    <div class="eleven columns">
+                      <input class="u-full-width" type="text" value="@url" name="imageUrls"/>
+                    </div>
+                    <div class="one columns close">
+                      <a class="close">X</a>
+                    </div>
+                  </div>
+                })
+              }
+            </div>
+            <div class="row new-location-image">
+              <label>New Location Image</label>
+              <div class="upload-image">
+                  <input type="file" class="path" id="new-image-path-@location.sLocationCode"/>
+                  <label for="new-image-path-@location.sLocationCode" class="button browse">Browse</label>
+                  <input class="display-path" type="text" readonly/>
+                  <a class="button upload">Upload</a>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="six columns">
+                <label for="availableFrom">Available From: </label>
+                <input class="u-full-width" type="text" id="availableFrom" name="availableFrom" value="@(location.availableFrom ? new Date(location.availableFrom) : '')" />
+              </div>
+              <div class="six columns">
+                <label for="closedFrom">Closed On: </label>
+                <input class="u-full-width" type="text" id="closedFrom" name="closedFrom" value="@(location.closedFrom ? new Date(location.closedFrom) : '')" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="four columns">
+                <label for="createdAt">Created At: </label>
+                <input class="u-full-width" readonly type="text" id="createdAt" name="createdAt" value="@(location.createdAt ? new Date(location.createdAt) : '')" />
+              </div>
+              <div class="four columns">
+                <label for="updatedAt">Updated At: </label>
+                <input class="u-full-width" readonly type="text" id="updatedAt" name="updatedAt" value="@(location.updatedAt ? new Date(location.updatedAt) : '')" />
+              </div>
+              <div class="four columns">
+                <label for="updatedBy">Updated By: </label>
+                <input class="u-full-width" readonly type="text" id="updatedBy" name="updatedBy" value="@location.updatedBy" />
+              </div>
+            </div>
+            <div class="row buttons">
+              <div class="four columns">
+                <a class="button u-full-width reset">Reset</a>
+              </div>
+              <div class="four columns"><div class="u-full-width">&nbsp;</div></div>
+              <div class="four columns">
+                <input class="button u-full-width" type="submit" value="Save @location.sLocationCode" />
+              </div>
+            </div>
+          </form></div>
+        </div>
+        <br><br>
+      })
+    }
+@*
+      <br>
+      @{
+        location = {
+          locationCode: 'New',
+          status: 'New'
+        }
+      }
+        <div class="location new hidden">
+          <label class="heading" for="location-radio-@location.sLocationCode">
+            <span>@location.sLocationCode: @location.cityState</span>
+            <span>@location.status</span>
+          </label>
+          <input type="radio" class="location-radios" id="location-radio-@location.locationCode" name="location-radios" />
+          <div class="details"><form action="/nimda/saveLocationInfo" method="POST">
+            <div class="row">
+              <div class="six columns">
+                <label for="corporateCode">Corporate Code: </label>
+                <input class="u-full-width" type="text" id="corporateCode" name="corporateCode" value="@location.corporateCode" />
+              </div>
+              <div class="six columns">
+                <label for="locationCode">Location Code: </label>
+                <input class="u-full-width" type="text" id="locationCode" name="locationCode" value="@location.locationCode" />
+              </div>
+              <input type="hidden" id="corporateCodeLocationCode" name="corporateCodeLocationCode" value="@location.corporateCodeLocationCode" />
+            </div>
+            <div class="row">
+              <div class="five columns">
+                <label for="streetAddress">Door & Street: </label>
+                <input class="u-full-width" type="text" id="streetAddress" name="streetAddress" value="@location.streetAddress" />
+              </div>
+              <div class="four columns">
+                <label for="cityState">City, State: </label>
+                <input class="u-full-width" type="text" id="cityState" name="cityState" value="@location.cityState" />
+              </div>
+              <div class="three columns">
+                <label for="zip">ZIP: </label>
+                <input class="u-full-width" type="text" id="zip" name="zip" value="@location.zip" />
+              </div>
+            </div>
+            <div class="row location-images">
+              <label>Location Images</label>
+              @if(location.imageUrls) {
+                @location.imageUrls.forEach(function(url){
+                  <div class="row location-image">
+                    <div class="eleven columns">
+                      <input class="u-full-width" type="text" value="@url" name="imageUrls"/>
+                    </div>
+                    <div class="one columns close">
+                      <a class="close">X</a>
+                    </div>
+                  </div>
+                })
+              }
+            </div>
+            <div class="row new-location-image">
+              <label>New Location Image</label>
+              <div class="upload-image">
+                  <input type="file" class="path" id="new-image-path-@location.locationCode"/>
+                  <label for="new-image-path-@location.locationCode" class="button browse">Browse</label>
+                  <input class="display-path" type="text" readonly/>
+                  <a class="button upload">Upload</a>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="six columns">
+                <label for="availableFrom">Available From: </label>
+                <input class="u-full-width" type="text" id="availableFrom" name="availableFrom" value="@(location.availableFrom ? new Date(location.availableFrom) : '')" />
+              </div>
+              <div class="six columns">
+                <label for="closedFrom">Closed On: </label>
+                <input class="u-full-width" type="text" id="closedFrom" name="closedFrom" value="@(location.closedFrom ? new Date(location.closedFrom) : '')" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="four columns">
+                <label for="createdAt">Created At: </label>
+                <input class="u-full-width" readonly type="text" id="createdAt" name="createdAt" value="@(new Date())" />
+              </div>
+              <div class="four columns">
+                <label for="updatedAt">Updated At: </label>
+                <input class="u-full-width" readonly type="text" id="updatedAt" name="updatedAt" value="@(location.updatedAt ? new Date(location.updatedAt) : '')" />
+              </div>
+              <div class="four columns">
+                <label for="updatedBy">Updated By: </label>
+                <input class="u-full-width" readonly type="text" id="updatedBy" name="updatedBy" value="@location.updatedBy" />
+              </div>
+            </div>
+            <div class="row buttons">
+              <div class="four columns">
+                <a class="button u-full-width reset">Reset</a>
+              </div>
+              <div class="four columns"><div class="u-full-width">&nbsp;</div></div>
+              <div class="four columns">
+                <input class="button u-full-width" type="submit" value="Save @location.locationCode" />
+              </div>
+            </div>
+          </form></div>
+        </div>
+        *@
+        <br><br><br>
+
+    <div class="row">
+      <div class="six columns">
+        <a class="button u-full-width" id="add-new-location">+ NEW LOCATION</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="@(html.staticFilePath)/bundle/scripts/@html.assetVersions['admin.min.js']" type="text/javascript"></script>

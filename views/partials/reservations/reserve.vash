@@ -1,0 +1,63 @@
+<div class="container reserve">
+  <div class="heading">Reserve A Unit</div>
+  <div class="details">
+    <div class="unit-details">
+      <div class="heading">Unit Information</div>
+      <div class="row">
+        @html.include('partials/reservations/unitInformationBrief', model)
+      </div>
+    </div>
+    <div class="tenant-details">
+      <div class="heading">Your Information</div>
+      <div class="reservation-type-selector container">
+        <label for="at-location">
+          <div class="title">Reserve a Unit</div>
+          <div class="description">
+            Reserve a unit online and bring your confirmation into the location office
+            to complete your lease in person.
+            <strong>Reservation fee applies.</strong>
+          </div>
+        </label>
+        <div class="reservation" id="reserve-at-location">
+          <form method="POST" action="/reserve/info">
+            <input type="hidden" name="unitId" value="@model.unit.UnitID">
+            <input type="hidden" name="unitTypeId" value="@model.unit.UnitTypeID">
+            <input type="hidden" name="siteId" value="@model.unit.SiteID">
+            <input type="hidden" name="locationCode" value="@model.unit.sLocationCode">
+            <input type="hidden" id="unit-width" name="unitWidth" value="@model.unit.dcWidth">
+            <input type="hidden" id="unit-length" name="unitLength" value="@model.unit.dcLength">
+            <input type="hidden" id="type" name="type" value="atLocation">
+            <input type="hidden" name="model" value="@(encodeURIComponent(JSON.stringify(model)))">
+            <input type="submit" class="store-space-button-secondary" value="Reserve Now" id="continue-reservation-at-location">
+          </form>
+        </div>
+
+        <div class="separator"></div>
+
+        <label for="online" class="">
+          <div class="title">Rent a Unit</div>
+          <div class="description">
+            Complete your rental by signing the eLease and
+            setting up your card payment information online.
+            <strong>No extra fee applies.</strong>
+          </div>
+        </label>
+        <div class="reservation" id="reserve-online">
+          <form method="POST" action="/reserve/info">
+            <input type="hidden" name="unitId" value="@model.unit.UnitID">
+            <input type="hidden" name="unitTypeId" value="@model.unit.UnitTypeID">
+            <input type="hidden" name="siteId" value="@model.unit.SiteID">
+            <input type="hidden" name="locationCode" value="@model.unit.sLocationCode">
+            <input type="hidden" id="unit-width" name="unitWidth" value="@model.unit.dcWidth">
+            <input type="hidden" id="unit-length" name="unitLength" value="@model.unit.dcLength">
+            <input type="hidden" id="type" name="type" value="online">
+            <input type="hidden" name="model" value="@(encodeURIComponent(JSON.stringify(model)))">
+            <input type="submit" class="store-space-button" value="Move in now" id="continue-reservation-online">
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="next-steps"></div>
+</div>

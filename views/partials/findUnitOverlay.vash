@@ -1,0 +1,13 @@
+<div class="find-unit-overlay @(model.isMobileOnly ? 'mobile-only' : '')">
+  <div class="mobile-label">FIND A UNIT</div>
+  @if(model.heading){
+    <div class="heading">@html.raw(model.heading)</div>
+  }
+  @if(model.text){
+    <div class="text">@html.raw(model.text)</div>
+  }
+  <form method="POST" action="/find-by-zip" id="find-by-zip-form" class="@(model.hideOnMobile ? 'hide-on-mobile' : '')">
+    <input class="text" id="zip" name="zip" type="number" min="001" max="99999" maxlength="5" placeholder="Enter Zip Code">
+    <a class="button" type="submit" onclick="this.parentNode.submit();"><i class="fas fa-search"></i><span>Find a Unit</span></a>
+  </form>
+</div>

@@ -1,0 +1,7 @@
+<div class="container breadcrumbs">
+  @if(model.crumbs) {
+    @model.crumbs.forEach(function(crumb){
+      <a href="@crumb.href">@crumb.label</a>
+    })
+  }
+</div>

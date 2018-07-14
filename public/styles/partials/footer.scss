@@ -1,0 +1,136 @@
+footer {
+  position: relative;
+  bottom: 0;
+  background-color: $store-space-blue;
+  padding: 20px 0;
+  width: 100%;
+
+  @include flex-direction(column);
+
+  i {
+    margin-right: 10px;
+  }
+
+  .row {
+    width: 100%;
+    @include flex-direction(row);
+    @include justify-content(space-between);
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    @include breakpoint(mobile) {
+      @include flex-direction(column);
+    }
+
+    .right {
+      @include flex-grow(1);
+      @include justify-content(flex-end);
+    }
+
+    &.top-bar {
+      @include justify-content(flex-end);
+
+      .left {
+        padding-bottom: 10px;
+
+        .logo {
+          max-height: 40px;
+        }
+      }
+
+      .right {
+        margin-top: 10px;
+
+        .footer-item {
+          margin: 0 10px;
+          padding: 5px 0;
+          text-transform: uppercase;
+          font-size: 16px;
+          font-weight: bold;
+          border-top: 1px solid $store-space-red;
+          border-bottom: 1px solid $store-space-red;
+
+          &:first-of-type {
+            margin-left: 0;
+          }
+
+          &:last-of-type {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+    &.middle-bar {
+      margin-top: 5px;
+      margin-bottom: 20px;
+      @include align-items(flex-start);
+
+      @include breakpoint(mobile) {
+        @include align-items(center);
+      }
+
+      .left {
+        @include flex-basis(32%);
+        @include flex-direction(column);
+        @include align-items(flex-start);
+
+        @include breakpoint(mobile) {
+          @include align-items(center);
+        }
+
+        .footer-item {
+          font-weight: 200;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+      }
+
+      .right {
+        @include flex-basis(32%);
+        @include flex-grow(0);
+        @include flex-direction(row);
+        @include align-items(flex-start);
+
+        @include breakpoint(mobile) {
+          display: none;
+        }
+
+        .footer-item {
+          margin-bottom: 10px;
+          font-size: 12px;
+        }
+
+        .sub-left,
+        .sub-right {
+          @include flex-grow(1);
+          @include align-items(flex-end);
+          @include flex-direction(column);
+        }
+      }
+    }
+
+    &.bottom-bar{
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+      color: white;
+
+      font-size: 12px;
+
+      .right {
+        @include flex-grow(1);
+
+        .footer-item {
+          margin: 0 20px;
+
+          &:first-of-type {
+            margin-left: 0
+          }
+
+          &:last-of-type {
+            margin-right: 0
+          }
+        }
+      }
+    }
+  }
+}

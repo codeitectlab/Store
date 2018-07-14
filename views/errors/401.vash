@@ -1,0 +1,6 @@
+@html.extend('layouts/main', function(model) {
+  @html.block('body', function(model) {
+    <h1>401</h1>
+    <h2>Unauthorized</h2>
+  })
+})

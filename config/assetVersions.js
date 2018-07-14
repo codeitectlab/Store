@@ -1,0 +1,1 @@
+module.exports = {"skeleton.min.css":"skeleton-5f2562c574.min.css","main.min.css":"main-4b8da506a7.min.css","admin.min.js":"admin-b28cde0972.min.js","main.min.js":"main-c49f02122e.min.js"}

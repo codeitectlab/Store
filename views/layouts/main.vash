@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  @if (model.includeGA) {
+    @html.include('partials/ga')
+  }
+  @if (model.includeConversionGA) {
+    @html.include('partials/conversionGA')
+  }
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="keywords" content="@model.metaKeywords" />
+  <meta name="description" content="@model.metaDescription" />
+  <meta property="og:title" content="@model.ogTitle" />
+  <meta property="og:description" content="@model.ogDescription" />
+  <meta property="og:image" content="@model.ogImage" />
+  <meta property="og:url" content="@model.ogUrl" />
+  <meta property="fb:app_id" content="" />
+
+  <title>@model.pageTitle</title>
+
+  <link rel="icon" type="image/png" href="@(html.staticFilePath)/images/storespace_favicon.png" />
+
+  <link rel='stylesheet prefetch' href="https://fonts.googleapis.com/css?family=Cabin:200,400,700|Montserrat:700|Raleway:400,700,900" rel="stylesheet">
+
+@*  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+*@
+  <link rel="stylesheet" href="@(html.staticFilePath)/bundle/styles/@html.assetVersions['main.min.css']" />
+
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+ 
+  <script>
+    FontAwesomeConfig = { autoReplaceSvg: 'nest' }
+
+    @if(model.locations){
+      @html.raw('window.locs = ' + JSON.stringify(model.locations));
+    }
+
+    $(document).ready(function() {
+       $('#phone').inputmask({"mask": "(999) 999-9999"});
+    });
+  </script>
+
+</head>
+
+<body>
+
+  @if (!model.disableHeader) {
+    @html.include('partials/header')
+  }
+
+  <main class="layout">
+    @html.block('body')
+  </main>
+
+  @if (!model.disableFooter) {
+    @html.include('partials/footer')
+  }
+
+  <script src="@(html.staticFilePath)/bundle/scripts/@html.assetVersions['main.min.js']" type="text/javascript"></script>
+  <script>
+    var closeModal = function() {
+      var closer = document.querySelector('#modal #modal-close');
+      if(closer) {
+        closer.click();
+      }
+    }
+  </script>
+</body>
+</html>

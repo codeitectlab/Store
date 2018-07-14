@@ -1,0 +1,22 @@
+@html.extend('partials/account/base', function(m) {
+  @html.block('partial', function(m) {
+    <div class="card create-edit-thanks">
+      <div class="heading">@model.heading</div>
+      <div class="fields">
+        <div class="row"><div class="twelve column">
+          <h3>
+            Thanks!
+          </h3>
+          <div class="helper-label">
+            Your account details have been saved.
+            Visit your account page to view your reservations, make payments or update your information.
+          </div>
+        </div></div>
+        <div class="row"><div class="twelve column">
+          <a class="button store-space-button-secondary" href="/account">Go To My Account &nbsp; <i class="fas fa-arrow-circle-right"></i></a>
+        </div></div>
+
+      </div>
+    </div>
+  })
+})

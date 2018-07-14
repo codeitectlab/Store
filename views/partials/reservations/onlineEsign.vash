@@ -1,0 +1,35 @@
+<div class="container reserve">
+  <div class="heading">Reserve A Unit</div>
+  <div class="details">
+    <div class="unit-details">
+      <div class="heading">Unit Information</div>
+      <div class="row">
+        @html.include('partials/reservations/unitInformation', model)
+      </div>
+    </div>
+    <div class="tenant-details">
+      <div class="heading">eSign Documents</div>
+      <div class="reservation-type-selector container">
+        <div class="reservation" id="reserve-online">
+          <form method="POST" action="/reserve/online-summary" id="reservation-form">
+            <div class="screen screen-3">
+              <div class="fields">
+                <div class="row">
+                  <div class="column">
+                    <a class="button store-space-button" id="doc" data-src="@model.esign.url" data-id="@model.esign.id">Click to read and eSign Lease</a>
+                  </div>
+                </div>
+                <div class="row">
+                  <input type="hidden" name="model" value="@(encodeURIComponent(JSON.stringify(model)))">
+                  <input type="hidden" name="id" value="@model.esign.id">
+                  <input type="submit" class="hidden" value="NEXT: Summary" id="submit-esign">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="next-steps"></div>
+</div>

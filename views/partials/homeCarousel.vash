@@ -1,0 +1,18 @@
+<div class="home-carousel container">
+  <h3>Why should you choose Store Space?</h3>
+  <p>We know life happens, that’s why at Store Space we make storage simple. Whether you have a little or a lot to store, Store Space is committed to making your storage experience as simple and hassle-free as possible. We offer a wide range of self-storage options for both residential and commercial needs. Stop by today to see what sets our stores apart.</p>
+
+  @if(model.carouselItems){
+    <div class="carousel-container">
+      @model.carouselItems.forEach(function(item){
+        @html.include('partials/' + item.type, item.model)
+      })
+
+    </div>
+  }
+
+  <div class="reserve-a-unit">
+    <h4>Get your space today!</h4>
+    <a href="/locations">Reserve a Unit</a>
+  </div>
+</div>

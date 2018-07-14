@@ -1,0 +1,104 @@
+<div class="available-units" id="available-units" data-sort-by="default" data-sort-order="default">
+@*
+  <div class="heading container">
+    <div class="label">Available Units</div>
+    <div class="text hidden">
+      <i class="far fa-hand-point-right yellow"></i>
+      Not sure how big a unit you need? Check out our
+      <a class="yellow">Storage Calculator Tool!</a>
+    </div>
+  </div>
+*@
+  <div class="sub-heading container">
+    <div class="left">Sort By:</div>
+    <div class="right">
+      <a class="sort-by-size">Size</a>
+      <a class="sort-by-price">Price</a>
+    </div>
+  </div>
+
+  <div class="units">
+    @if(model.units) {
+      @model.units.forEach(function(unit){
+        <div class="unit" data-unit-type-id="@unit.UnitTypeID" data-unit-id="@unit.UnitID" data-unit-name="@unit.sUnitName" data-unit-price="@(unit.dcPushRate || unit.dcStdRate)" data-unit-area="@unit.dcArea">
+          <div class="column image-container">
+          @{
+            filename = 'any-unit'
+            if(unit.dcWidth == 2.5 && unit.dcLength == 2.5) filename = '5x5'
+            if(unit.dcWidth == 2.5 && unit.dcLength == 4) filename = '5x5'
+            if(unit.dcWidth == 4 && unit.dcLength == 5) filename = '5x5'
+            if(unit.dcWidth == 5 && unit.dcLength == 5) filename = '5x5'
+            if(unit.dcWidth == 5 && unit.dcLength == 6) filename = '5x5'
+            if(unit.dcWidth == 5 && unit.dcLength == 7) filename = '5x10'
+            if(unit.dcWidth == 5 && unit.dcLength == 9) filename = '5x10'
+            if(unit.dcWidth == 5 && unit.dcLength == 10) filename = '5x10'
+            if(unit.dcWidth == 6 && unit.dcLength == 10) filename = '5x10'
+            if(unit.dcWidth == 6 && unit.dcLength == 12.5) filename = '5x10'
+            if(unit.dcWidth == 5 && unit.dcLength == 15) filename = '5x15'
+            if(unit.dcWidth == 8 && unit.dcLength == 10) filename = '10x10'
+            if(unit.dcWidth == 10 && unit.dcLength == 10) filename = '10x10'
+            if(unit.dcWidth == 11 && unit.dcLength == 12) filename = '10x10'
+            if(unit.dcWidth == 12 && unit.dcLength == 12) filename = '10x10'
+            if(unit.dcWidth == 10 && unit.dcLength == 15) filename = '10x15'
+            if(unit.dcWidth == 10 && unit.dcLength == 12.5) filename = '10x15'
+            if(unit.dcWidth == 13 && unit.dcLength == 14) filename = '10x15'
+            if(unit.dcWidth == 10 && unit.dcLength == 20) filename = '10x20'
+            if(unit.dcWidth == 11 && unit.dcLength == 20) filename = '10x20'
+            if(unit.dcWidth == 10 && unit.dcLength == 25) filename = '10x25'
+            if(unit.dcWidth == 10 && unit.dcLength == 30) filename = '10x30'
+            if(unit.dcWidth == 11 && unit.dcLength == 30) filename = '10x30'
+            if(unit.dcWidth == 12.5 && unit.dcLength == 30) filename = '10x30'
+            if(unit.sTypeName.toLowerCase().indexOf('parking') > -1) filename = 'parking_rv'
+
+            filename = filename + '.png'
+          }
+            <img src="@html.staticFilePath/images/units/@filename">
+          </div>
+          <div class="unit-properties">
+            <div class="column left">
+              <div class="sub top">
+                <div>
+                  <div class="size">@unit.displaySize</div>
+                  <div class="type">@unit.sTypeName</div>
+                </div>
+                <div>
+                  <div class="price">@unit.displayPushRate<span class="per-month">/mo</span></div>
+                  <div class="sub-price">Online Rate</div>
+                </div>
+              </div>
+              <div class="sub bottom">
+                @{
+                  features = unit.features.join(', ');
+                }
+                <div class="features">@features</div>
+                <div class="rate-info">
+                  @if(unit.dcPushRate != unit.dcStdRate){
+                    <div class="in-store-price">@unit.displayStdRate in store</div>
+                  }
+                </div>
+              </div>
+
+            </div>
+            <div class="column right unit-promos">
+              <form class="reserve" action="/reserve/info" method="POST">
+                <input type="hidden" id="site-id" name="siteId" value="@unit.SiteID">
+                <input type="hidden" id="unit-id" name="unitId" value="@unit.UnitID_FirstAvailable">
+                <input type="hidden" id="unit-type-id" name="unitTypeId" value="@unit.UnitTypeID">
+                <input type="hidden" id="unit-width" name="unitWidth" value="@unit.dcWidth">
+                <input type="hidden" id="unit-length" name="unitLength" value="@unit.dcLength">
+                <input type="hidden" id="type" name="type" value="atLocation">
+                <a class="button" type="submit" value="Reserve" onclick="this.parentNode.submit();">RESERVE</a>
+              </form>
+
+              @if(unit.concession){
+                <div class="label green"><i class="fas fa-tag"></i> @unit.concession.displayName</div>
+              }
+            </div>
+          </div>
+        </div>
+
+      })
+    }
+
+  </div>
+</div>

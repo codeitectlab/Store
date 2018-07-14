@@ -1,0 +1,9 @@
+@html.extend('layouts/main', function(model) {
+  @html.block('body', function(model) {
+    @if(model.body) {
+      @model.body.forEach(function(partial){
+        @html.include('partials/' + partial.type, partial.model)
+      })
+    }
+  })
+})

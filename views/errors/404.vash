@@ -1,0 +1,6 @@
+@html.extend('layouts/main', function(model) {
+  @html.block('body', function(model) {
+    <h1>404</h1>
+    <h2>Not Found</h2>
+  })
+})

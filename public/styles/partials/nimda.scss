@@ -1,0 +1,152 @@
+.nimda {
+  margin: 20px auto;
+  font-size: 0.9em !important;
+  line-height: 0.9em !important;
+
+  .header {
+    @include display-flex();
+    @include justify-content(space-between);
+
+    margin-bottom: 20px;
+
+    a {
+      color: $black;
+      padding: 10px;
+
+      &[href] {
+        text-decoration: underline;
+      }
+
+      &:hover {
+        color: $black !important;
+      }
+    }
+  }
+
+  .location {
+    & > label.heading,
+    & > div.details {
+      border: 1px solid #efefef;
+    }
+
+    .heading {
+      @include display-flex();
+      @include justify-content(space-between);
+      @include align-items(center);
+
+      padding: 20px;
+      background-color: #efefef;
+      margin-bottom: 0;
+      width: 100%;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    & > div.details {
+      display: none;
+      padding: 20px;
+      border-top: none;
+    }
+
+    input.location-radios {
+      visibility: hidden;
+      width: 0.01px;
+      height: 0.01px;
+      opacity: 0.01;
+      display: none !important;
+
+      &:checked ~ .details {
+        display: block !important;
+      }
+    }
+
+    form {
+      margin-bottom: 0;
+    }
+
+    .location-images {
+      margin-bottom: 20px;
+    }
+
+    .row.buttons {
+      margin-top: 20px;
+    }
+  }
+
+  div.close {
+    padding-top: 10px;
+    padding-bottom: 9px;
+
+    a.close {
+
+      color: $store-space-red;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .upload-image,
+  .upload-video {
+    @include display-flex();
+    input[type="file"] {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+    input {
+      @include flex-grow(8);
+      border-radius: 0 !important;
+    }
+    .button {
+      display: block;
+      padding: 0;
+      @include flex-grow(1);
+      background-color: $white;
+
+      &.browse {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      &.upload {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+    .display-path {
+      border-right: none;
+      border-left: none;
+    }
+  }
+
+  .placeholder svg{
+    @include animation(rotate 1s steps(8) infinite);
+  }
+
+  input,
+  a.button {
+    font-size: 0.9em !important;
+
+    &[type="submit"],
+    &#add-new-location {
+      background-color: $store-space-red !important;
+      border-color: $store-space-red-shadow !important;
+      color: $white !important;
+    }
+  }
+
+  input {
+    &:disabled,
+    &:read-only {
+      background-color: #efefef !important;
+    }
+  }
+
+}

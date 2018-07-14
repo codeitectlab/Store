@@ -1,0 +1,80 @@
+.account {
+  &.account-container {
+    width: 100vw;
+    max-height: calc(100vh - 160px);
+    height: calc(100vh - 160px);
+    background-image: url('/images/man-store-space-box.jpg');
+    background-position: center center;
+  }
+
+  > div.card-container {
+    @include display-flex();
+    @include justify-content(center);
+    @include align-items(center);
+    background-color: rgba(0, 31, 96, 0.5);
+    height: 100%;
+  }
+
+  .card {
+  }
+
+  .row {
+    @include display-flex();
+    @include justify-content(center);
+    @include align-items(center);
+    @include flex-direction(row);
+    margin-bottom: 20px;
+
+    .column,
+    .columns {
+      @include display-flex();
+      @include justify-content(center);
+      @include align-items(flex-start);
+      @include flex-direction(column);
+      width: 100%;
+      padding-right: 20px;
+
+      &.two {
+        width: 16.666666666667%;
+      }
+      &.three {
+        width: 25%;
+      }
+      &.four {
+        width: 33.33333333333%;
+      }
+      &.six {
+        width: 50%;
+      }
+      &.nine {
+        width: 75%;
+      }
+    }
+  }
+
+  input {
+    font-size: 14px;
+    @include remove-number-spinners();
+  }
+
+  select, option {
+    font-size: 14px;
+  }
+
+  .helper-label {
+    display: block;
+    font-size: 16px;
+    color: $black;
+    font-style: italic;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+
+    &[href] {
+      text-decoration: underline;
+    }
+  }
+
+  @import './partials/account/login';
+  @import './partials/account/createEdit';
+}
